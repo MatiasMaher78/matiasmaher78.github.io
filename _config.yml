@@ -20,7 +20,7 @@ author: Matias Maher
 ###############################################
 
 navbar-links:
-  About Me: "Junior Data Analyst | SQL, Python, Power BI & Generative AI"
+  About Me: "aboutme"
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
