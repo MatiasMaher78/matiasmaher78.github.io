@@ -10,17 +10,17 @@
 ############################
 
 # Name of website
-title: My website
+title: Portafolio de Matias Maher
 
 # Your name to show in the footer
-author: Some Person
+author: Matias Maher
 
 ###############################################
 # --- List of links in the navigation bar --- #
 ###############################################
 
 navbar-links:
-  About Me: "aboutme"
+  About Me: "Junior Data Analyst | SQL, Python, Power BI & Generative AI"
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
