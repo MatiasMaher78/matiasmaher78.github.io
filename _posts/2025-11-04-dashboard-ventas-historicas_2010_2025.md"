@@ -1,1 +1,26 @@
+---
+layout: post
+title:  "Análisis Estratégico de Ventas Automotrices (2010-2025)"
+date:   2026-01-04 12:00:00 -0300
+categories: powerbi data-analysis
+---
 
+## El Desafío
+La empresa necesitaba transformar datos históricos dispersos en información procesable para definir compras estratégicas y mejorar márgenes.
+
+## La Solución
+Desarrollé un dashboard en **Power BI** que analiza el mercado español de autopartes.
+
+### Tecnologías Usadas
+* Power BI (DAX, Power Query)
+* Excel (Limpieza previa)
+* Datos públicos de matriculación
+
+## Resultados Clave
+1. **Identificación de Rotación:** Detectamos qué repuestos tienen alta rotación pero bajo margen.
+2. **Calidad de Datos:** Se visualizó la degradación de la calidad de datos en años anteriores, impulsando una nueva política de ingreso de datos.
+
+> "Aunque el modelo de datos original no permitía un esquema de estrella perfecto, logré modelar las relaciones para obtener insights críticos sin esperar a una reestructuración de la base de datos."
+
+![Dashboard Ejemplo](https://via.placeholder.com/800x400.png?text=Aqui+iria+una+imagen+de+tu+Dashboard)
+*(Nota: Datos anonimizados por confidencialidad)*
