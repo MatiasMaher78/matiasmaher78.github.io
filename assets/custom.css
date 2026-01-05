@@ -1,1 +1,97 @@
+/* ======================================================
+   CUSTOM THEME – DATA / BI / AUTOMATION 4.0
+   Author: Matías Maher
+   ====================================================== */
 
+/* -------- VARIABLES DE COLOR -------- */
+:root {
+  /* Neutros */
+  --bg-main: #FFFFFF;
+  --bg-surface: #F5F7FA;
+  --border-soft: #E3E8EF;
+
+  /* Texto */
+  --text-main: #0F172A;
+  --text-secondary: #475569;
+
+  /* Identidad */
+  --primary: #0B3A5B;   /* Azul petróleo – BI / Negocio */
+  --accent: #14B8A6;    /* Teal – Automation / Tech */
+  --highlight: #F59E0B; /* Muy puntual */
+}
+
+/* -------- BASE -------- */
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* -------- TEXTO -------- */
+p, li {
+  color: var(--text-secondary);
+}
+
+.post-meta,
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* -------- TÍTULOS -------- */
+h1, h2, h3, h4, h5 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* -------- LINKS -------- */
+a {
+  color: var(--accent);
+}
+
+a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* -------- SEPARADORES -------- */
+hr {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 2rem 0;
+}
+
+/* -------- CONTENEDOR DEL POST -------- */
+.blog-post {
+  background-color: var(--bg-main);
+}
+
+/* -------- TAGS -------- */
+.blog-tags a {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  color: var(--primary);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.85rem;
+}
+
+.blog-tags a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* -------- CODE / TECH -------- */
+pre, code {
+  background-color: var(--bg-surface);
+  border-radius: 4px;
+}
+
+/* -------- BOTONES (si usás alguno) -------- */
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent);
+  border-color: var(--accent);
+}
