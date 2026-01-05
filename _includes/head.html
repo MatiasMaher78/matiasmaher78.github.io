@@ -94,6 +94,9 @@
     {% endfor %}
   {% endif %}
 
+  <!-- Custom overrides (must load LAST) -->
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
   {% if site.fb_app_id %}
   <meta property="fb:app_id" content="{{ site.fb_app_id }}">
   {% endif %}
@@ -171,5 +174,4 @@
       {% include {{ file }} %}
     {% endfor %}
   {% endif %}
-
 </head>
