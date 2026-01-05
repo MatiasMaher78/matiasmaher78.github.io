@@ -1,41 +1,46 @@
 ---
 layout: post
-title: "De Excel a Power BI: Optimizando la Inteligencia de Negocios en Automoción"
+title: "De Excel a Power BI: Optimizando la Inteligencia de Negocios"
 date: 2026-01-04 12:00:00 -0300
-categories: [powerbi, data-analysis, etl, business-intelligence]
+categories: [powerbi, data-analysis, etl]
 image: assets/images/dashboard-preview.png
 ---
 
 ## 🚀 Resumen del Proyecto
 
-Como parte de la estrategia de digitalización de **Reciclauto**, desarrollé un tablero analítico integral para diagnosticar la calidad de los datos históricos y medir el rendimiento comercial (2010-2025). El objetivo principal fue transformar exportaciones estáticas de un ERP legado en un modelo de datos dinámico que permitiera la toma de decisiones basada en evidencia.
+Como parte de la estrategia de digitalización de **Reciclauto**, desarrollé un tablero analítico integral para diagnosticar la calidad de los datos históricos y medir el rendimiento comercial (2010-2025).
+
+El objetivo principal fue transformar exportaciones estáticas de un ERP legado en un modelo de datos dinámico que permitiera la toma de decisiones basada en evidencia.
 
 ---
 
 ## 🧩 El Desafío: Del Caos a la Estructura
 
-El reto principal residía en la infraestructura de datos. Al carecer de acceso directo a SQL, el análisis dependía de exportaciones de Excel ("Alta", "Ventas" y "Stock") que no estaban diseñadas para un modelo analítico tipo estrella.
+El reto principal residía en la infraestructura de datos. Al carecer de acceso directo a SQL, el análisis dependía de exportaciones de Excel ("Alta", "Ventas" y "Stock") que no estaban diseñadas para un modelo analítico.
 
 Los problemas principales incluían:
 * **Datos sucios:** Inconsistencias en fechas y textos.
 * **Claves inexistentes:** Dificultad para cruzar las ventas con el stock histórico.
-* **Silos de información:** Tablas desconectadas que impedían ver la trazabilidad completa del ciclo de vida del vehículo.
+* **Silos de información:** Tablas desconectadas.
 
 ---
 
 ## 🛠️ La Solución Técnica
 
-Implementé una solución de Business Intelligence end-to-end utilizando **Power BI** y **Excel**, enfocándome en tres pilares:
+Implementé una solución utilizando **Power BI** y **Excel**, enfocándome en tres pilares:
 
-### 1. Ingeniería de Datos (ETL con Power Query)
+### 1. Ingeniería de Datos (ETL)
+
 Para normalizar la información, creé procesos que logran:
 * Generar claves sintéticas (`VehiculoKey`) para unificar tablas.
-* Normalizar el campo "Estado Stock" y limpiar errores de tipeo.
-* Crear indicadores de calidad (ej. `Coherente_AltaVsVenta`) para detectar errores lógicos en las fechas.
+* Normalizar el campo "Estado Stock".
+* Crear indicadores de calidad (ej. `Coherente_AltaVsVenta`).
 
 ### 2. Modelado Avanzado (DAX)
-Debido a las limitaciones de las claves originales del ERP, el modelo relacional estándar no era suficiente.
-> **Highlight Técnico:** Utilicé la función **`TREATAS`** en DAX para manejar dimensiones desconectadas. Esto permitió propagar filtros entre tablas que no tenían una relación física directa, asegurando la integridad de los cálculos sin romper el modelo.
+
+Debido a las limitaciones de las claves originales, el modelo relacional estándar no era suficiente.
+
+> **Highlight Técnico:** Utilicé la función **`TREATAS`** en DAX para manejar dimensiones desconectadas. Esto permitió propagar filtros entre tablas que no tenían una relación física directa.
 
 ---
 
@@ -44,30 +49,31 @@ Debido a las limitaciones de las claves originales del ERP, el modelo relacional
 El dashboard final se dividió en dos lienzos estratégicos:
 
 ### A. Diagnóstico de Calidad de Datos
+
 Logramos visualizar por primera vez la "salud" de nuestra información:
-* **Índice de Calidad:** Se desarrolló un semáforo que evalúa la completitud de Marca/Modelo y precios.
-* **El problema "Genérico":** Detectamos un volumen crítico de ventas categorizadas como "GENÉRICA", lo que impedía el análisis de rentabilidad por pieza específica. Esto impulsó un cambio inmediato en la política de registro de datos.
+* **Índice de Calidad:** Semáforo que evalúa la completitud de los datos.
+* **El problema "Genérico":** Detectamos un volumen crítico de ventas categorizadas como "GENÉRICA", lo que impedía el análisis de rentabilidad. Esto impulsó un cambio inmediato en la política de registro.
 
 ### B. Rendimiento Comercial (2020-2025)
+
 Se habilitó la visión estratégica del negocio mediante:
-* **Top 10 Marcas:** Identificación de las marcas que sostienen la facturación real.
-* **Análisis de Rotación:** Visualización de las piezas con mayor salida real (excluyendo genéricos) para optimizar el stock.
-* **Tendencias:** Análisis de estacionalidad y ticket promedio por periodo.
+* **Top 10 Marcas:** Identificación de las marcas que sostienen la facturación.
+* **Análisis de Rotación:** Visualización de las piezas con mayor salida real.
+* **Tendencias:** Análisis de estacionalidad y ticket promedio.
 
 ---
 
 ## 🔮 Conclusión y Próximos Pasos
 
-Este proyecto no solo entregó un reporte, sino que sentó las bases para una cultura de datos en la empresa.
+Este proyecto sentó las bases para una cultura de datos en la empresa. Los siguientes pasos incluyen:
 
-Los siguientes pasos ya definidos incluyen:
-1.  Transición de Excel a conexión directa **SQL**.
-2.  Construcción de tablas maestras estandarizadas para Vehículos y Piezas.
-3.  Integración de costes operativos para calcular el margen neto real por pieza desmontada.
+1. Transición de Excel a conexión directa **SQL**.
+2. Construcción de tablas maestras estandarizadas.
+3. Integración de costes operativos para calcular márgenes reales.
 
 ---
 
-> *Este proyecto demuestra cómo técnicas avanzadas de modelado pueden extraer valor estratégico incluso de sistemas heredados con limitaciones estructurales.*
+> *Este proyecto demuestra cómo técnicas avanzadas de modelado pueden extraer valor estratégico incluso de sistemas heredados.*
 
-![Vista Previa del Dashboard](https://via.placeholder.com/800x400.png?text=Dashboard+PowerBI+Reciclauto)
-*(Nota: Los datos mostrados en las imágenes han sido anonimizados por confidencialidad)*
+![Vista Previa](https://via.placeholder.com/800x400.png?text=Dashboard+PowerBI+Reciclauto)
+*(Nota: Datos anonimizados por confidencialidad)*
