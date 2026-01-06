@@ -1,1 +1,54 @@
+:root {
+  --bg-main: #FFFFFF;
+  --bg-surface: #F5F7FA;
+  --border-soft: #E3E8EF;
 
+  --text-main: #0F172A;
+  --text-secondary: #475569;
+
+  --primary: #0B3A5B;   /* BI / Negocio */
+  --accent: #14B8A6;    /* Automation / Tech */
+  --highlight: #F59E0B; /* Muy puntual */
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+p, li, .post-meta, .text-muted {
+  color: var(--text-secondary);
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+a {
+  color: var(--accent);
+}
+a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 2rem 0;
+}
+
+.blog-tags a {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  color: var(--primary);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.85rem;
+}
+
+.blog-tags a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
