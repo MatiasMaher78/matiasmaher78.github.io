@@ -26,6 +26,23 @@ layout: page
       {% endcapture %}
       {% assign thumbnail=thumbnail | strip %}
 
+      {%- assign ptype = post.project_type | default: "" -%}
+      {%- assign ptype_down = ptype | downcase -%}
+
+      {% if ptype_down == "bi" %}
+        {% assign badge_text = "BI / Analytics" %}
+        {% assign badge_class = "project-badge--bi" %}
+      {% elsif ptype_down == "automation" %}
+        {% assign badge_text = "Automation / Scripts" %}
+        {% assign badge_class = "project-badge--automation" %}
+      {% elsif ptype_down == "data" %}
+        {% assign badge_text = "Data / SQL" %}
+        {% assign badge_class = "project-badge--data" %}
+      {% else %}
+        {% assign badge_text = "" %}
+        {% assign badge_class = "" %}
+      {% endif %}
+
       {% if site.feed_show_excerpt == false %}
       {% if thumbnail != "" %}
       <div class="post-image post-image-normal">
@@ -37,6 +54,13 @@ layout: page
       {% endif %}
 
       <a href="{{ post.url | absolute_url }}">
+
+        {% if badge_text != "" %}
+          <div class="project-badge-wrap">
+            <span class="project-badge {{ badge_class }}">{{ badge_text }}</span>
+          </div>
+        {% endif %}
+
         <h2 class="post-title">{{ post.title | strip_html }}</h2>
 
         {% if post.subtitle %}
@@ -120,3 +144,4 @@ layout: page
   {% endif %}
 </ul>
 {% endif %}
+
