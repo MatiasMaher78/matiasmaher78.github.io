@@ -57,4 +57,29 @@ El dashboard final se dividió en dos lienzos estratégicos:
 
 Logramos visualizar por primera vez la “salud” de la información:
 * **Índice de calidad:** semáforo que evalúa completitud y consistencia.
-* **Prob*
+* **Problema “Genérico”:** se detectó un volumen crítico de ventas categorizadas como “GENÉRICA”, lo que impedía análisis de rentabilidad. Esto impulsó un cambio inmediato en la política de registro.
+
+### B. Rendimiento Comercial (2020–2025)
+
+Se habilitó la visión estratégica del negocio mediante:
+* **Top 10 marcas:** identificación de marcas que sostienen facturación.
+* **Análisis de rotación:** piezas con mayor salida real.
+* **Tendencias:** estacionalidad y ticket promedio.
+
+---
+
+## 🔮 Conclusión y Próximos Pasos
+
+Este proyecto sentó las bases para una cultura de datos en la empresa. Los siguientes pasos incluyen:
+
+1. Transición de Excel a conexión directa **SQL**.
+2. Construcción de tablas maestras estandarizadas.
+3. Integración de costes operativos para calcular márgenes reales.
+
+---
+
+> *Este proyecto demuestra cómo técnicas avanzadas de modelado pueden extraer valor estratégico incluso de sistemas heredados.*
+
+![Vista previa del dashboard](/assets/img/bgimage.png)
+*(Nota: datos anonimizados por confidencialidad. Valores ajustados/escala aplicada para publicación.)*
+
