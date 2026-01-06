@@ -87,3 +87,25 @@ hr {
   border-color: rgba(245, 158, 11, 0.35);
   color: #b45309;
 }
+
+/* ======================================================
+   Home post cards – type accent border
+   ====================================================== */
+
+.post-preview {
+  padding-left: 1rem;
+  border-left: 4px solid transparent;
+}
+
+.post-preview--bi {
+  border-left-color: var(--primary);
+}
+
+.post-preview--automation {
+  border-left-color: var(--accent);
+}
+
+/* MVP track (producto / end-to-end) */
+.post-preview--mvp {
+  border-left-color: #f59e0b; /* ámbar */
+}
