@@ -3,6 +3,7 @@ layout: post
 title: "De Excel a Power BI: Optimizando la Inteligencia de Negocios"
 date: 2026-01-04 12:00:00 -0300
 categories: [powerbi, data-analysis, etl]
+project_type: bi
 image: "/assets/img/thumb.png"
 ---
 
