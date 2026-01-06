@@ -9,8 +9,8 @@ layout: page
 <!-- role="list" needed so that `list-style: none` in Safari doesn't remove the list semantics -->
 <ul class="posts-list list-unstyled" role="list">
   {% for post in posts %}
-<li class="post-preview {% if badge_class != "" %}post-preview--{{ ptype_down }}{% endif %}">
-    <article>
+  {%- assign ptype_down = post.project_type | default: "" | downcase -%}
+  <li class="post-preview{% if ptype_down != "" %} post-preview--{{ ptype_down }}{% endif %}">
 
       {%- capture thumbnail -%}
         {% if post.thumbnail-img %}
