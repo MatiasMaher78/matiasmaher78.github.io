@@ -35,6 +35,9 @@ layout: page
       {% elsif ptype_down == "automation" %}
         {% assign badge_text = "Automation / Scripts" %}
         {% assign badge_class = "project-badge--automation" %}
+      {% elsif ptype_down == "mvp" %}
+  {% assign badge_text = "MVP / Product" %}
+  {% assign badge_class = "project-badge--mvp" %}
       {% elsif ptype_down == "data" %}
         {% assign badge_text = "Data / SQL" %}
         {% assign badge_class = "project-badge--data" %}
