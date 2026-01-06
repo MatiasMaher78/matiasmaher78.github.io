@@ -39,4 +39,52 @@ Implementé una solución utilizando **Power BI** y **Excel**, enfocándome en t
 
 Para normalizar la información, creé procesos que logran:
 
-- Ge
+- Generar claves sintéticas (`VehiculoKey`) para unificar tablas.
+- Normalizar el campo "Estado Stock".
+- Crear indicadores de calidad (ej. `Coherente_AltaVsVenta`).
+
+### 2. Modelado Avanzado (DAX)
+
+Debido a las limitaciones de las claves originales, el modelo relacional estándar no era suficiente.
+
+> **Highlight técnico:** utilicé la función **`TREATAS`** en DAX para manejar dimensiones desconectadas.  
+> Esto permitió propagar filtros entre tablas que no tenían una relación física directa.
+
+---
+
+## 📊 Resultados e Insights Clave
+
+El dashboard final se dividió en dos lienzos estratégicos.
+
+### A. Diagnóstico de Calidad de Datos
+
+Logramos visualizar por primera vez la "salud" de la información:
+
+- **Índice de calidad:** semáforo que evalúa completitud y consistencia.
+- **Problema "Genérico":** se detectó un volumen crítico de ventas categorizadas como "GENÉRICA", lo que impedía el análisis de rentabilidad. Esto impulsó un cambio inmediato en la política de registro.
+
+### B. Rendimiento Comercial (2020–2025)
+
+Se habilitó la visión estratégica del negocio mediante:
+
+- **Top 10 marcas:** identificación de marcas que sostienen la facturación.
+- **Análisis de rotación:** piezas con mayor salida real.
+- **Tendencias:** análisis de estacionalidad y ticket promedio.
+
+---
+
+## 🔮 Conclusión y Próximos Pasos
+
+Este proyecto sentó las bases para una cultura de datos en la empresa. Los siguientes pasos incluyen:
+
+1. Transición de Excel a conexión directa **SQL**.
+2. Construcción de tablas maestras estandarizadas.
+3. Integración de costes operativos para calcular márgenes reales.
+
+---
+
+> *Este proyecto demuestra cómo técnicas avanzadas de modelado pueden extraer valor estratégico incluso de sistemas heredados.*
+
+![Vista previa del dashboard](/assets/img/bgimage.png)
+
+*(Nota: datos anonimizados por confidencialidad. Valores ajustados / escala aplicada para publicación.)*
