@@ -52,3 +52,38 @@ hr {
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ======================================================
+   Project type badges (Home)
+   ====================================================== */
+
+.project-badge-wrap {
+  margin-bottom: 0.35rem;
+}
+
+.project-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-surface);
+  letter-spacing: 0.2px;
+}
+
+.project-badge--bi {
+  border-color: rgba(11, 58, 91, 0.25);
+  color: var(--primary);
+}
+
+.project-badge--automation {
+  border-color: rgba(20, 184, 166, 0.35);
+  color: var(--accent);
+}
+
+/* opcional: si más adelante querés “Data/SQL” como tercer track */
+.project-badge--data {
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #b45309;
+}
