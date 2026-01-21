@@ -1,1 +1,18 @@
+<article>
+  <a href="{{ post.url | absolute_url }}">
+    <h3 class="post-title">{{ post.title | strip_html }}</h3>
+  </a>
+
+  <p class="post-meta">
+    {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
+    {{ post.date | date: date_format }}
+  </p>
+
+  <div class="post-entry">
+    {{ post.excerpt | strip_html | truncatewords: site.excerpt_length }}
+    {% if post.content != post.excerpt %}
+      <a href="{{ post.url | absolute_url }}" class="post-read-more">[Read&nbsp;More]</a>
+    {% endif %}
+  </div>
+</article>
 
