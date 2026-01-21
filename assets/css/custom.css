@@ -113,3 +113,19 @@ hr {
 .post-preview--mvp {
   border-left-color: #f59e0b; /* ámbar */
 }
+
+/* =========================
+   Home sections
+========================= */
+
+.home-section {
+  margin: 3rem 0;
+}
+
+.home-section-title {
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+/* cards already handled by post-preview-* borders */
+
