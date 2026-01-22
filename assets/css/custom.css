@@ -233,3 +233,31 @@ hr {
 .post-preview a:hover .post-title {
   color: var(--accent);
 }
+
+/* =========================================================
+   Home cards - left accent border by project_type
+   (matches your current classes: post-preview-bi, etc.)
+   ========================================================= */
+
+.posts-list .post-preview {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-left: 6px solid transparent;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.06);
+}
+
+/* Type accents (IMPORTANT: matches your HTML classes) */
+.posts-list .post-preview-bi {
+  border-left-color: var(--primary);
+}
+
+.posts-list .post-preview-automation {
+  border-left-color: var(--accent);
+}
+
+.posts-list .post-preview-mvp {
+  border-left-color: var(--highlight);
+}
