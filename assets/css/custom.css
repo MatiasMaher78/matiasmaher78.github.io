@@ -224,3 +224,12 @@ hr {
     font-size: 1.2rem;
   }
 }
+
+/* Make card feel clickable */
+.post-preview a {
+  text-decoration: none;
+}
+
+.post-preview a:hover .post-title {
+  color: var(--accent);
+}
