@@ -1,39 +1,64 @@
 ---
 layout: post
-title: "TÍTULO (MVP / Product)"
-date: 2026-01-01 12:00:00 -0300
-categories: [mvp, automation, bi]
+title: "TÍTULO DEL MVP / PRODUCTO"
+date: 2026-01-XX 12:00:00 -0300
+categories: [mvp, product]
 project_type: mvp
 image: "/assets/img/thumb.png"
+
+# Opcional (recomendado)
+github: ""
+demo: ""
+status: "mvp"   # poc | mvp | production
+stack: []
 ---
 
-Resumen ejecutivo: MVP end-to-end, qué conecta y qué habilita.
+🚀 **Pitch:** qué problema resuelve, para quién, y el impacto esperado (en 1–2 líneas, sin datos sensibles).
 
 <!--more-->
 
-## Visión
-- Usuario:
-- Problema:
-- Propuesta:
+## 🧩 Problema
+- Contexto del negocio o usuario
+- Dolor principal que hoy no está resuelto
+- Por qué es relevante resolverlo ahora
 
-## Alcance del MVP
-- Hace:
-- No hace:
+## 💡 Solución (MVP)
+- Qué hace el producto
+- Cómo lo hace (alto nivel)
+- Qué lo diferencia de alternativas manuales o existentes
 
-## Flujo end-to-end
-1) Entrada
-2) Extracción
-3) Validación
-4) Precio
-5) ERP
-6) Auditoría
+## 🧱 Alcance
+**Incluye**
+- Funcionalidad clave 1
+- Funcionalidad clave 2
 
-## Métricas
-- Tiempo
-- % automatización
-- % revisión humana
+**No incluye**
+- Lo que conscientemente quedó fuera del MVP
 
-## Roadmap
-- Fase 2:
-- Fase 3:
+## ⚙️ Arquitectura (alto nivel)
+- Frontend / UI
+- Backend / lógica
+- Datos / integraciones
 
+## 📈 Métrica de éxito
+- KPI principal del MVP
+- Métrica secundaria (ahorro de tiempo, reducción de errores, etc.)
+
+## 🗺️ Roadmap
+- Próximo paso inmediato
+- Iteración 2
+- Iteración 3
+
+## 🧪 Estado actual
+- `{{ page.status }}`
+
+## 🧰 Stack
+- {{ page.stack }}
+
+## 🔒 Notas de confidencialidad
+- Datos anonimizados
+- Valores escalados / endpoints omitidos
+
+## 🔗 Links
+{% if page.github and page.github != "" %}- Repo: {{ page.github }}{% endif %}
+{% if page.demo and page.demo != "" %}- Demo / Video: {{ page.demo }}{% endif %}
