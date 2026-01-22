@@ -48,4 +48,4 @@ navbar-var-length: false
 ######################################
 
 site-css:
-  - "/assets/css/custom.css"
+  - "/assets/css/custom.v2.css"
