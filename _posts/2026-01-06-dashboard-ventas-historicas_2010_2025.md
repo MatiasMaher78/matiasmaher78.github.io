@@ -5,6 +5,7 @@ date: 2026-01-04 12:00:00 -0300
 categories: [powerbi, data-analysis, etl]
 project_type: bi
 image: "/assets/img/thumb.png"
+tags: [Power BI, DAX, Power Query, Data Modeling, ETL, Data Quality, TREATAS]
 ---
 
 Proyecto BI end-to-end para una **empresa de desguace automotor (España)**: transformé exportaciones de un ERP legado + Excel en un modelo analítico en Power BI para **diagnosticar calidad de datos** y **medir performance comercial** (2010–2025).  
