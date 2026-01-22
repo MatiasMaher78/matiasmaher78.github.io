@@ -1,39 +1,45 @@
 ---
 layout: post
-title: "TÍTULO (BI)"
-date: 2026-01-01 12:00:00 -0300
-categories: [powerbi, data-analysis, bi]
+title: "TÍTULO DEL PROYECTO (BI)"
+date: 2026-01-XX 12:00:00 -0300
+categories: [powerbi, data-analysis, etl]
 project_type: bi
 image: "/assets/img/thumb.png"
+
+# Opcional (recomendado)
+github: ""
+demo: ""
+tags: [Power BI, DAX, ETL]
 ---
 
-Resumen ejecutivo (2–3 líneas): problema, solución y resultado (sin datos sensibles).
+📌 **1-liner:** qué resolviste y para quién (sin datos sensibles).
 
 <!--more-->
 
-## Contexto
-- Industria/empresa: (anonimizada)
-- Objetivo:
-- Restricciones:
+## 🎯 Objetivo
+- Qué decisión de negocio habilita
+- Qué KPI/área impacta
 
-## Datos y Fuentes
-- Fuentes:
-- Issues principales:
+## 🧩 Contexto y problema
+- Fuente de datos (ERP/Excel/Sheets) y limitaciones
+- Pain points (calidad, claves, silos, etc.)
 
-## Solución (ETL + Modelo)
-### ETL
-- Normalización
-- Claves sintéticas
-- Reglas de calidad
+## 🏗️ Solución (arquitectura)
+- ETL: qué limpiaste/transformaste
+- Modelo: estrella / bridge / TREATAS
+- Medidas clave (sin revelar nombres internos sensibles)
 
-### DAX / Modelado
-- Medidas clave
-- Highlight técnico (1): `TREATAS` / etc.
+## 📊 Resultados
+- 3 bullets cuantificables (tiempo, errores, visibilidad)
+- Insight importante descubierto
 
-## Resultados e Insights
-- 3 bullets
-- Próximos pasos
+## 🔍 Validación
+- Cómo comprobaste calidad y coherencia (checks, reconciliación)
 
-![Vista previa](/assets/img/bgimage.png)
-*(Datos anonimizados. Valores ajustados para publicación.)*
+## 🧠 Lecciones y próximos pasos
+- 3 bullets accionables
+
+## 🔗 Links
+{% if page.github and page.github != "" %}- Repo: {{ page.github }}{% endif %}
+{% if page.demo and page.demo != "" %}- Demo/Video: {{ page.demo }}{% endif %}
 
