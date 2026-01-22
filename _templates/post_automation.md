@@ -5,6 +5,8 @@ date: 2026-01-XX 12:00:00 -0300
 categories: [automation, scripts]
 project_type: automation
 image: "/assets/img/thumb.png"
+tags: [Python, Pandas, Playwright, CLI, Cache, Scraping]
+
 
 # Opcional (recomendado)
 github: ""
