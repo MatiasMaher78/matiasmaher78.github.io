@@ -425,3 +425,7 @@ body,
 .site-content {
   background-color: var(--bg-main) !important;
 }
+
+html, body, .main-content, .page-content, .container, .container-fluid {
+  background-color: var(--bg-main) !important;
+}
