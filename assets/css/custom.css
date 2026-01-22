@@ -394,3 +394,34 @@ html, body { background: var(--bg-main) !important; }
 .container-fluid {
   background: transparent !important;
 }
+
+/* === FORCE SITE BACKGROUND (Beautiful Jekyll) === */
+html, body {
+  background-color: var(--bg-main) !important;
+}
+
+body,
+.main-content,
+.page-content,
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.wrapper,
+.site-content,
+.page,
+.post,
+.post-content,
+.blog-post,
+.blog-post-content {
+  background-color: transparent !important;
+}
+
+/* El “lienzo” real (donde está el contenido) */
+.main-content,
+.page-content,
+.wrapper,
+.site-content {
+  background-color: var(--bg-main) !important;
+}
