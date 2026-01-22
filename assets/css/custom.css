@@ -261,3 +261,26 @@ hr {
 .posts-list .post-preview-mvp {
   border-left-color: var(--highlight);
 }
+
+/* =========================================================
+   Home card - tags as stack pills
+   ========================================================= */
+.post-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.25rem 0 0.9rem 0;
+}
+
+.stack-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  line-height: 1.2;
+}
