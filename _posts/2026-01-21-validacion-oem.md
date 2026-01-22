@@ -5,6 +5,7 @@ date: 2026-01-21
 categories: [automation, scripts]
 project_type: automation
 image: "/assets/img/thumb.png"
+tags: [Python, Pandas, Playwright, Web Scraping, Data Validation, Autosave]
 ---
 
 🚀 Automatiza la **validación de referencias OEM** para reducir *falsos positivos* y asegurar publicaciones correctas en eCommerce.
