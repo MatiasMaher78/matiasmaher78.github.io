@@ -5,6 +5,8 @@ date: 2026-01-XX 12:00:00 -0300
 categories: [powerbi, data-analysis, etl]
 project_type: bi
 image: "/assets/img/thumb.png"
+tags: [Power BI, DAX, Power Query, Excel, ETL]
+
 
 # Opcional (recomendado)
 github: ""
