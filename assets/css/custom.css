@@ -284,3 +284,54 @@ hr {
   color: var(--primary);
   line-height: 1.2;
 }
+
+/* =========================================================
+   Stack pills (Home cards) - FINAL
+   Pegalo al final de assets/css/custom.css
+   ========================================================= */
+
+.post-stack{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+  margin:.65rem 0 .4rem;
+}
+
+.stack-pill{
+  display:inline-flex;
+  align-items:center;
+  padding:.18rem .55rem;
+  border-radius:999px;
+  font-size:.78rem;
+  line-height:1.2;
+  font-weight:600;
+  letter-spacing:.2px;
+  background:var(--bg-surface);
+  border:1px solid var(--border-soft);
+  color:var(--text-secondary);
+}
+
+/* Hover sutil */
+.stack-pill:hover{
+  border-color:rgba(20,184,166,.45);
+  color:var(--text-main);
+}
+
+/* Acento por tipo de proyecto (usa el color del borde izquierdo) */
+.post-preview--bi .stack-pill{
+  border-color:rgba(11,58,91,.25);
+  color:var(--primary);
+}
+.post-preview--automation .stack-pill{
+  border-color:rgba(20,184,166,.35);
+  color:var(--accent);
+}
+.post-preview--mvp .stack-pill{
+  border-color:rgba(245,158,11,.35);
+  color:#b45309;
+}
+
+/* Opcional: si el card está sobre fondo gris, mejorar contraste */
+.post-preview .stack-pill{
+  background:rgba(245,247,250,.85);
+}
