@@ -5,6 +5,8 @@ date: 2026-01-XX 12:00:00 -0300
 categories: [mvp, product]
 project_type: mvp
 image: "/assets/img/thumb.png"
+tags: [Python, OCR, SQL, Workflow, MVP]
+
 
 # Opcional (recomendado)
 github: ""
