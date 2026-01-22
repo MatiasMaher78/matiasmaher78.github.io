@@ -129,3 +129,98 @@ hr {
 
 /* cards already handled by post-preview-* borders */
 
+/* =========================================================
+   HOME - Portfolio cards (strong visual)
+   ========================================================= */
+
+.posts-list {
+  margin-top: 0.75rem;
+}
+
+.post-preview {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  padding: 1.25rem 1.25rem 1.1rem 1.25rem;
+  margin: 0 0 1.25rem 0;
+
+  /* subtle elevation */
+  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.06);
+
+  /* keep your "type border" logic */
+  border-left-width: 6px;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+.post-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(2, 6, 23, 0.10);
+}
+
+/* Title */
+.post-preview .post-title {
+  margin: 0 0 0.4rem 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+}
+
+/* Meta */
+.post-preview .post-meta {
+  margin: 0 0 0.85rem 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+/* Excerpt */
+.post-preview .post-entry {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Read more button-like */
+.post-preview .post-read-more {
+  display: inline-block;
+  margin-left: 0.25rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.post-preview .post-read-more:hover {
+  border-color: rgba(20, 184, 166, 0.35);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Section headers spacing */
+.home-section-title {
+  font-size: 1.35rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Divider prettier */
+.home-section + hr,
+hr {
+  border: none;
+  border-top: 1px solid var(--border-soft);
+  margin: 2.2rem 0;
+}
+
+/* Mobile polish */
+@media (max-width: 640px) {
+  .post-preview {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  .post-preview .post-title {
+    font-size: 1.2rem;
+  }
+}
