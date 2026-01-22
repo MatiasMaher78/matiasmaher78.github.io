@@ -8,6 +8,14 @@
     {{ post.date | date: date_format }}
   </p>
 
+  {% if post.tags and post.tags.size > 0 %}
+  <div class="post-stack" role="list" aria-label="Stack">
+    {% for tech in post.tags %}
+      <span class="stack-pill" role="listitem">{{ tech }}</span>
+    {% endfor %}
+  </div>
+{% endif %}
+
   <div class="post-entry">
     {{ post.excerpt | strip_html | truncatewords: site.excerpt_length }}
     {% if post.content != post.excerpt %}
