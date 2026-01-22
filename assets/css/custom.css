@@ -382,3 +382,15 @@ hr {
 .post-preview .stack-pill{
   background:rgba(245,247,250,.85);
 }
+
+/* FORCE background on theme wrappers (Beautiful Jekyll) */
+html, body { background: var(--bg-main) !important; }
+
+.main-content,
+.page-content,
+.container,
+.container-md,
+.container-lg,
+.container-fluid {
+  background: transparent !important;
+}
