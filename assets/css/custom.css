@@ -1,6 +1,6 @@
 :root {
-  --bg-main: #F5F7FA;
-  --bg-surface: #F5F7FA;
+  --bg-main: #F5F7FA;     /* fondo general (gris muy claro) */
+  --bg-surface: #FFFFFF;  /* tarjetas / superficies */
   --border-soft: #E3E8EF;
 
   --text-main: #0F172A;
@@ -8,12 +8,20 @@
 
   --primary: #0B3A5B;   /* BI / Negocio */
   --accent: #14B8A6;    /* Automation / Tech */
-  --highlight: #F59E0B; /* Muy puntual */
+  --highlight: #F59E0B; /* MVP / Product */
+}
+
+/* =========================
+   Base
+========================= */
+
+html, body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main);
 }
 
 body {
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  background-color: var(--bg-main) !important;
 }
 
 p, li, .post-meta, .text-muted {
@@ -39,79 +47,20 @@ hr {
   margin: 2rem 0;
 }
 
+/* =========================
+   (si usás tags nativos de theme)
+========================= */
 .blog-tags a {
-  background-color: var(--bg-surface);
+  background-color: rgba(255,255,255,0.9);
   border: 1px solid var(--border-soft);
   color: var(--primary);
-  border-radius: 6px;
-  padding: 3px 8px;
-  font-size: 0.85rem;
-}
-
-.blog-tags a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-/* ======================================================
-   Project type badges (Home)
-   ====================================================== */
-
-.project-badge-wrap {
-  margin-bottom: 0.35rem;
-}
-
-.project-badge {
-  display: inline-block;
-  padding: 4px 10px;
   border-radius: 999px;
+  padding: 3px 10px;
   font-size: 0.85rem;
-  font-weight: 700;
-  border: 1px solid var(--border-soft);
-  background: var(--bg-surface);
-  letter-spacing: 0.2px;
 }
-
-.project-badge--bi {
-  border-color: rgba(11, 58, 91, 0.25);
-  color: var(--primary);
-}
-
-.project-badge--automation {
-  border-color: rgba(20, 184, 166, 0.35);
+.blog-tags a:hover {
+  border-color: rgba(20, 184, 166, 0.45);
   color: var(--accent);
-}
-
-.project-badge--mvp {
-  border-color: rgba(245, 158, 11, 0.35);
-  color: #b45309;
-}
-/* opcional: si más adelante querés “Data/SQL” como tercer track */
-.project-badge--data {
-  border-color: rgba(245, 158, 11, 0.35);
-  color: #b45309;
-}
-
-/* ======================================================
-   Home post cards – type accent border
-   ====================================================== */
-
-.post-preview {
-  padding-left: 1rem;
-  border-left: 4px solid transparent;
-}
-
-.post-preview--bi {
-  border-left-color: var(--primary);
-}
-
-.post-preview--automation {
-  border-left-color: var(--accent);
-}
-
-/* MVP track (producto / end-to-end) */
-.post-preview--mvp {
-  border-left-color: #f59e0b; /* ámbar */
 }
 
 /* =========================
@@ -123,44 +72,53 @@ hr {
 }
 
 .home-section-title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   color: var(--primary);
+  font-size: 1.25rem;
 }
 
-/* cards already handled by post-preview-* borders */
-
-/* =========================================================
-   HOME - Portfolio cards (strong visual)
-   ========================================================= */
+/* =========================
+   Portfolio cards (Home)
+========================= */
 
 .posts-list {
   margin-top: 0.75rem;
 }
 
-.post-preview {
+/* Base card */
+.posts-list .post-preview {
   background: var(--bg-surface);
   border: 1px solid var(--border-soft);
+  border-left: 6px solid transparent; /* acento por tipo */
   border-radius: 14px;
-  padding: 1.25rem 1.25rem 1.1rem 1.25rem;
-  margin: 0 0 1.25rem 0;
-
-  /* subtle elevation */
-  box-shadow: 0 8px 22px rgba(2, 6, 23, 0.06);
-
-  /* keep your "type border" logic */
-  border-left-width: 6px;
-  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.06);
+  transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
-.post-preview:hover {
+.posts-list .post-preview:hover {
   transform: translateY(-2px);
   box-shadow: 0 14px 30px rgba(2, 6, 23, 0.10);
+}
+
+/* Type accents (tus clases reales en home.html) */
+.posts-list .post-preview-bi {
+  border-left-color: var(--primary);
+}
+
+.posts-list .post-preview-automation {
+  border-left-color: var(--accent);
+}
+
+.posts-list .post-preview-mvp {
+  border-left-color: var(--highlight);
 }
 
 /* Title */
 .post-preview .post-title {
   margin: 0 0 0.4rem 0;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   line-height: 1.25;
   letter-spacing: -0.2px;
 }
@@ -193,39 +151,12 @@ hr {
 }
 
 .post-preview .post-read-more:hover {
-  border-color: rgba(20, 184, 166, 0.35);
+  border-color: rgba(20, 184, 166, 0.45);
   color: var(--accent);
   text-decoration: none;
 }
 
-/* Section headers spacing */
-.home-section-title {
-  font-size: 1.35rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.2rem;
-}
-
-/* Divider prettier */
-.home-section + hr,
-hr {
-  border: none;
-  border-top: 1px solid var(--border-soft);
-  margin: 2.2rem 0;
-}
-
-/* Mobile polish */
-@media (max-width: 640px) {
-  .post-preview {
-    padding: 1rem;
-    border-radius: 12px;
-  }
-
-  .post-preview .post-title {
-    font-size: 1.2rem;
-  }
-}
-
-/* Make card feel clickable */
+/* Make card feel clickable (sin subrayado) */
 .post-preview a {
   text-decoration: none;
 }
@@ -234,56 +165,9 @@ hr {
   color: var(--accent);
 }
 
-/* =========================================================
-   Home cards - left accent border by project_type
-   (matches your current classes: post-preview-bi, etc.)
-   ========================================================= */
-
-.posts-list .post-preview {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-soft);
-  border-left: 6px solid transparent;
-  border-radius: 12px;
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.06);
-}
-
-/* Type accents (IMPORTANT: matches your HTML classes) */
-.posts-list .post-preview-bi {
-  border-left-color: var(--primary);
-}
-
-.posts-list .post-preview-automation {
-  border-left-color: var(--accent);
-}
-
-.posts-list .post-preview-mvp {
-  border-left-color: var(--highlight);
-}
-
-/* =========================================================
-   Home card - tags as stack pills
-   ========================================================= */
-.post-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0.25rem 0 0.9rem 0;
-}
-
-.stack-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.22rem 0.55rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft);
-  background: #fff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--primary);
-  line-height: 1.2;
-}
+/* =========================
+   Stack pills (Home cards)
+========================= */
 
 .post-stack{
   display:flex;
@@ -301,106 +185,51 @@ hr {
   line-height:1.2;
   font-weight:600;
   letter-spacing:.2px;
-  background:var(--bg-surface);
+  background: rgba(255,255,255,0.9);
   border:1px solid var(--border-soft);
   color:var(--text-secondary);
 }
 
-/* Hover sutil */
 .stack-pill:hover{
   border-color:rgba(20,184,166,.45);
   color:var(--text-main);
 }
 
-/* Acento por tipo de proyecto (usa el color del borde izquierdo) */
-.post-preview--bi .stack-pill{
-  border-color:rgba(11,58,91,.25);
-  color:var(--primary);
-}
-.post-preview--automation .stack-pill{
-  border-color:rgba(20,184,166,.35);
-  color:var(--accent);
-}
-.post-preview--mvp .stack-pill{
-  border-color:rgba(245,158,11,.35);
-  color:#b45309;
-}
-
-/* Opcional: si el card está sobre fondo gris, mejorar contraste */
-.post-preview .stack-pill{
-  background:rgba(245,247,250,.85);
-}
-
-/* =========================================================
-   Stack pills (Home cards) - FINAL
-   ========================================================= */
-
-.post-stack{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.45rem;
-  margin:.65rem 0 .4rem;
-}
-
-.stack-pill{
-  display:inline-flex;
-  align-items:center;
-  padding:.18rem .55rem;
-  border-radius:999px;
-  font-size:.78rem;
-  line-height:1.2;
-  font-weight:600;
-  letter-spacing:.2px;
-  background:var(--bg-surface);
-  border:1px solid var(--border-soft);
-  color:var(--text-secondary);
-}
-
-/* Hover sutil */
-.stack-pill:hover{
-  border-color:rgba(20,184,166,.45);
-  color:var(--text-main);
-}
-
-/* Acento por tipo de proyecto */
-.post-preview--bi .stack-pill{
-  border-color:rgba(11,58,91,.25);
+/* Acento por tipo (usa la clase del LI en home.html) */
+.post-preview-bi .stack-pill{
+  border-color:rgba(11,58,91,.22);
   color:var(--primary);
 }
 
-.post-preview--automation .stack-pill{
-  border-color:rgba(20,184,166,.35);
+.post-preview-automation .stack-pill{
+  border-color:rgba(20,184,166,.30);
   color:var(--accent);
 }
 
-.post-preview--mvp .stack-pill{
-  border-color:rgba(245,158,11,.35);
+.post-preview-mvp .stack-pill{
+  border-color:rgba(245,158,11,.30);
   color:#b45309;
 }
 
-/* Opcional: mejorar contraste en cards sobre fondo claro/gris */
-.post-preview .stack-pill{
-  background:rgba(245,247,250,.85);
+/* =========================
+   Mobile polish
+========================= */
+
+@media (max-width: 640px) {
+  .posts-list .post-preview {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  .post-preview .post-title {
+    font-size: 1.15rem;
+  }
 }
 
-/* FORCE background on theme wrappers (Beautiful Jekyll) */
-html, body { background: var(--bg-main) !important; }
+/* =========================
+   FORCE background over theme wrappers
+   (esto es lo que te faltaba ver reflejado)
+========================= */
 
-.main-content,
-.page-content,
-.container,
-.container-md,
-.container-lg,
-.container-fluid {
-  background: transparent !important;
-}
-
-/* === FORCE SITE BACKGROUND (Beautiful Jekyll) === */
-html, body {
-  background-color: var(--bg-main) !important;
-}
-
-body,
 .main-content,
 .page-content,
 .container,
@@ -409,23 +238,6 @@ body,
 .container-md,
 .container-sm,
 .wrapper,
-.site-content,
-.page,
-.post,
-.post-content,
-.blog-post,
-.blog-post-content {
-  background-color: transparent !important;
-}
-
-/* El “lienzo” real (donde está el contenido) */
-.main-content,
-.page-content,
-.wrapper,
 .site-content {
-  background-color: var(--bg-main) !important;
-}
-
-html, body, .main-content, .page-content, .container, .container-fluid {
-  background-color: var(--bg-main) !important;
+  background: transparent !important;
 }
