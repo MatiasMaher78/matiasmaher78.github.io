@@ -1,36 +1,36 @@
 ---
 layout: post
-title: "TÍTULO (Automation)"
-date: 2026-01-01 12:00:00 -0300
-categories: [automation, python]
+title: "TÍTULO DEL SCRIPT (AUTOMATION)"
+date: 2026-01-XX 12:00:00 -0300
+categories: [automation, scripts]
 project_type: automation
 image: "/assets/img/thumb.png"
+
+# Opcional (recomendado)
+github: ""
+status: "production"   # draft | poc | mvp | production
+stack: [Python, Playwright, Pandas]
 ---
 
-Resumen ejecutivo: qué automatiza, input/output, impacto (sin datos sensibles).
+🚀 **1-liner:** qué automatiza + beneficio principal (sin revelar sitios/credenciales).
 
 <!--more-->
 
-## Problema
-- Tarea manual:
-- Dolor:
+## 🧠 Qué hace
+- Input → Proceso → Output (3 bullets)
 
-## Objetivo
-- Input:
-- Output:
-- Criterio de éxito:
+## ⚙️ Cómo funciona (pipeline)
+1. …
+2. …
+3. …
 
-## Diseño / Arquitectura
-- Componentes:
-- Flujo:
-- Logs / reintentos / errores
+## ✅ Highlights
+- Calidad / Robustez (reintentos, autosave, cache, logs)
+- Performance (batching, reuse browser, etc.)
 
-## Implementación
-- Stack:
-- Puntos técnicos clave:
-- Riesgos y mitigaciones:
+## 🧰 Stack
+- {{ page.stack }}
 
-## Resultados
-- 3 bullets
-- Próximos pasos
-
+## 🧪 Cómo se ejecuta (CLI)
+```bash
+python -m TU_MODULO.cli --help
