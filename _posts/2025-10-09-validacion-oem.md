@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "🔧 Validación OEM Automática para Catálogo de Autopartes"
-date: 2025-01-10 12:00:00 -0300
+date: 2025-01-10 12:00:00
 categories: [automation, scripts]
 ptype: automation
 image: "/assets/img/thumb.png"
