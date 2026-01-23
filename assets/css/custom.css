@@ -6,9 +6,9 @@
   --text-main: #0F172A;
   --text-secondary: #475569;
 
-  --primary: #0B3A5B;   /* BI / Negocio */
-  --accent: #14B8A6;    /* Automation / Tech */
-  --highlight: #F59E0B; /* MVP / Product */
+  --primary: #0B3A5B;     /* BI / Negocio */
+  --accent: #14B8A6;      /* Automation / Tech */
+  --highlight: #F59E0B;   /* MVP / Product */
 }
 
 /* =========================
@@ -18,10 +18,6 @@
 html, body {
   background-color: var(--bg-main) !important;
   color: var(--text-main);
-}
-
-body {
-  background-color: var(--bg-main) !important;
 }
 
 p, li, .post-meta, .text-muted {
@@ -48,7 +44,7 @@ hr {
 }
 
 /* =========================
-   (si usás tags nativos de theme)
+   Tags nativos del theme (si los usás)
 ========================= */
 .blog-tags a {
   background-color: rgba(255,255,255,0.9);
@@ -106,11 +102,9 @@ hr {
 .posts-list .post-preview-bi {
   border-left-color: var(--primary);
 }
-
 .posts-list .post-preview-automation {
   border-left-color: var(--accent);
 }
-
 .posts-list .post-preview-mvp {
   border-left-color: var(--highlight);
 }
@@ -149,7 +143,6 @@ hr {
   font-weight: 600;
   color: var(--primary);
 }
-
 .post-preview .post-read-more:hover {
   border-color: rgba(20, 184, 166, 0.45);
   color: var(--accent);
@@ -160,7 +153,6 @@ hr {
 .post-preview a {
   text-decoration: none;
 }
-
 .post-preview a:hover .post-title {
   color: var(--accent);
 }
@@ -200,12 +192,10 @@ hr {
   border-color:rgba(11,58,91,.22);
   color:var(--primary);
 }
-
 .post-preview-automation .stack-pill{
   border-color:rgba(20,184,166,.30);
   color:var(--accent);
 }
-
 .post-preview-mvp .stack-pill{
   border-color:rgba(245,158,11,.30);
   color:#b45309;
@@ -225,98 +215,44 @@ hr {
   }
 }
 
-/* =========================
-   FORCE background over theme wrappers
-   (esto es lo que te faltaba ver reflejado)
-========================= */
+/* =========================================================
+   FIX FONDO BLANCO DEL THEME (Beautiful Jekyll)
+   - El problema suele ser: .main-content .container / .container-md (background #fff)
+   - Esto lo “anula” y vuelve a pintar el lienzo con --bg-main
+========================================================= */
 
-.main-content,
-.page-content,
-.container,
-.container-fluid,
-.container-lg,
-.container-md,
-.container-sm,
-.wrapper,
-.site-content {
-  background: transparent !important;
-}
-
-/* ===== FORCE SITE BACKGROUND (Beautiful Jekyll) ===== */
+/* 1) Aseguramos el fondo global */
 html, body {
   background-color: var(--bg-main) !important;
 }
 
-.main-content,
-.page-content,
-.container,
-.container-fluid,
-.container-lg,
-.container-md,
-.container-sm,
-.wrapper,
-.site-content {
-  background-color: transparent !important;
-}
-
-/* El lienzo donde realmente se pinta el contenido */
-.main-content,
-.page-content,
-.wrapper,
-.site-content {
-  background-color: var(--bg-main) !important;
-}
-
-/* ===== FORCE ONLY PAGE BACKGROUND (no cards) ===== */
-html, body {
-  background-color: var(--bg-main) !important;
-}
-
-/* Beautiful Jekyll wrappers often paint a white background */
-#main-content,
+/* 2) El theme suele pintar blanco en wrappers internos: lo dejamos transparente */
 .main-content,
 .page-content,
 .wrapper,
 .site-content,
-.container,
-.container-fluid,
-.container-lg,
-.container-md,
-.container-sm,
-header,
-footer {
-  background-color: transparent !important;
-}
-
-/* Apply bg to the actual canvas if theme uses it */
 #main-content,
-.main-content,
-.page-content,
-.wrapper,
-.site-content {
-  background-color: var(--bg-main) !important;
-}
-
-/* ===== FIX: the theme is painting a white canvas on top of body ===== */
-.main-content,
-.page-content,
-.container,
-.container-fluid,
-.container-lg,
-.container-md,
-.container-sm,
-.wrapper,
-.site-content,
-.blog-post,
-.post,
-.post-content {
+#page-content,
+.main-content .container,
+.main-content .container-fluid,
+.main-content .container-lg,
+.main-content .container-md,
+.main-content .container-sm,
+.page-content .container,
+.page-content .container-fluid,
+.page-content .container-lg,
+.page-content .container-md,
+.page-content .container-sm {
+  background-color: transparent !important;
   background: transparent !important;
 }
 
-/* Put the site background on the real canvas wrapper */
+/* 3) Pintamos el “lienzo” real (sin tocar cards) */
 .main-content,
 .page-content,
 .wrapper,
-.site-content {
+.site-content,
+#main-content,
+#page-content {
   background-color: var(--bg-main) !important;
 }
