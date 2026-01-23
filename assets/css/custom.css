@@ -256,3 +256,87 @@ html, body {
 #page-content {
   background-color: var(--bg-main) !important;
 }
+
+/* =========================================================
+   FINAL CARD POLISH (v1 close) - paste at END of custom.css
+   ========================================================= */
+
+/* Sections */
+.home-section { margin: 3.25rem 0; }
+.home-section-title { margin-bottom: 1.35rem; }
+
+/* Cards */
+.posts-list .post-preview{
+  border-radius: 16px;
+  padding: 1.35rem 1.35rem 1.2rem;
+  box-shadow: 0 10px 22px rgba(2, 8, 23, 0.07);
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+  cursor: default;
+}
+
+.posts-list .post-preview:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(2, 8, 23, 0.11);
+}
+
+/* Make whole card feel clickable when hovering links */
+.posts-list .post-preview a{ text-decoration: none; }
+.posts-list .post-preview a:hover .post-title{ color: var(--accent); }
+
+/* Title + meta + excerpt hierarchy */
+.post-preview .post-title{
+  font-size: 1.32rem;
+  line-height: 1.25;
+  margin: 0 0 0.45rem 0;
+}
+
+.post-preview .post-meta{
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
+  opacity: 0.95;
+}
+
+.post-preview .post-entry{
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* Read more looks like a small button */
+.post-preview .post-read-more{
+  padding: 0.34rem 0.6rem;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.95);
+}
+
+/* Stack pills (cleaner + consistent) */
+.post-stack{
+  gap: .4rem;
+  margin: .55rem 0 .55rem;
+}
+
+.stack-pill{
+  padding: .2rem .58rem;
+  font-size: .78rem;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid rgba(227,232,239,0.85);
+  color: var(--text-secondary);
+}
+
+.stack-pill:hover{
+  border-color: rgba(20,184,166,0.45);
+  color: var(--text-main);
+}
+
+/* Keep your type accent on pills */
+.post-preview-bi .stack-pill{ border-color: rgba(11,58,91,.20); color: var(--primary); }
+.post-preview-automation .stack-pill{ border-color: rgba(20,184,166,.28); color: var(--accent); }
+.post-preview-mvp .stack-pill{ border-color: rgba(245,158,11,.28); color: #b45309; }
+
+/* Mobile */
+@media (max-width: 640px){
+  .posts-list .post-preview{
+    padding: 1.05rem;
+    border-radius: 14px;
+  }
+  .post-preview .post-title{ font-size: 1.18rem; }
+}
