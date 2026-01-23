@@ -296,3 +296,27 @@ footer {
 .site-content {
   background-color: var(--bg-main) !important;
 }
+
+/* ===== FIX: the theme is painting a white canvas on top of body ===== */
+.main-content,
+.page-content,
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.wrapper,
+.site-content,
+.blog-post,
+.post,
+.post-content {
+  background: transparent !important;
+}
+
+/* Put the site background on the real canvas wrapper */
+.main-content,
+.page-content,
+.wrapper,
+.site-content {
+  background-color: var(--bg-main) !important;
+}
