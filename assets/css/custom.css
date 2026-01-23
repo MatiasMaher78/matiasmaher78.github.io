@@ -266,3 +266,33 @@ html, body {
 .site-content {
   background-color: var(--bg-main) !important;
 }
+
+/* ===== FORCE ONLY PAGE BACKGROUND (no cards) ===== */
+html, body {
+  background-color: var(--bg-main) !important;
+}
+
+/* Beautiful Jekyll wrappers often paint a white background */
+#main-content,
+.main-content,
+.page-content,
+.wrapper,
+.site-content,
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+header,
+footer {
+  background-color: transparent !important;
+}
+
+/* Apply bg to the actual canvas if theme uses it */
+#main-content,
+.main-content,
+.page-content,
+.wrapper,
+.site-content {
+  background-color: var(--bg-main) !important;
+}
