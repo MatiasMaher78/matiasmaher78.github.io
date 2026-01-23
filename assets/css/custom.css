@@ -1,5 +1,5 @@
 :root {
-  --bg-main: #F5F7FA;     /* fondo general (gris muy claro) */
+  --bg-main: #F4FAF9;     /* fondo general (turquesa muy claro, gris verdoso) */
   --bg-surface: #FFFFFF;  /* tarjetas / superficies */
   --border-soft: #E3E8EF;
 
@@ -240,4 +240,29 @@ hr {
 .wrapper,
 .site-content {
   background: transparent !important;
+}
+
+/* ===== FORCE SITE BACKGROUND (Beautiful Jekyll) ===== */
+html, body {
+  background-color: var(--bg-main) !important;
+}
+
+.main-content,
+.page-content,
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.wrapper,
+.site-content {
+  background-color: transparent !important;
+}
+
+/* El lienzo donde realmente se pinta el contenido */
+.main-content,
+.page-content,
+.wrapper,
+.site-content {
+  background-color: var(--bg-main) !important;
 }
