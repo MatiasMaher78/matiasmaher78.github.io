@@ -79,8 +79,6 @@ El informe está construido sobre **exportes de ERP + Excel**, aplicando:
 - `03-performance-2027-2032.png` (tendencia mensual + top marcas)
 - `04-toyota.png` (radiografía TOYOTA)
 
-*(Opcional: reemplazar por 1 GIF + 2 capturas para hacerlo más “scrolleable” para RRHH.)*
-
 ---
 
 ## 🧰 Stack
