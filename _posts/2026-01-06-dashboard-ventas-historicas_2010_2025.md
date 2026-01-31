@@ -1,92 +1,88 @@
 ---
 layout: post
-title: "De Excel a Power BI: Optimizando la Inteligencia de Negocios"
-date: 2026-01-04 12:00:00 -0300
-categories: [powerbi, data-analysis, etl]
+title: "📈 Demo Power BI: Ventas Históricas + Calidad de Datos (Repuestos Usados)"
+date: 2026-01-31 12:00:00 -0300
+categories: [powerbi, data-analysis, bi]
 project_type: bi
+tags: [Power BI, DAX, Data Quality, Data Modeling, ETL, Excel, Business Intelligence]
 image: "/assets/img/thumb.png"
-tags: [Power BI, DAX, Power Query, Data Modeling, ETL, Data Quality, TREATAS]
 ---
 
-Proyecto BI end-to-end para una **empresa de desguace automotor (España)**: transformé exportaciones de un ERP legado + Excel en un modelo analítico en Power BI para **diagnosticar calidad de datos** y **medir performance comercial** (2010–2025).  
-Resultados: visibilidad operativa, detección de inconsistencias críticas (p. ej. registros "genéricos") y base técnica para migración futura a SQL.
+Proyecto BI end-to-end para una **empresa de repuestos usados** (datos anonimizados: importes escalados y años desplazados).  
+Dashboard en Power BI para **entender performance comercial** y **medir calidad del catálogo** en segundos, incluso con exportes limitados de ERP.
 
 <!--more-->
 
-## 🚀 Resumen del Proyecto
+## 🎯 Objetivo del demo
 
-Como parte de una estrategia de digitalización, desarrollé un tablero analítico integral para diagnosticar la calidad de los datos históricos y medir el rendimiento comercial (2010–2025).
+Este informe permite responder rápido preguntas típicas de dirección y operaciones:
 
-El objetivo principal fue transformar exportaciones estáticas de un ERP legado en un modelo de datos dinámico que permitiera la toma de decisiones basada en evidencia.
-
----
-
-## 🧩 El Desafío: Del Caos a la Estructura
-
-El reto principal residía en la infraestructura de datos. Al carecer de acceso directo a SQL, el análisis dependía de exportaciones de Excel ("Alta", "Ventas" y "Stock") que no estaban diseñadas para un modelo analítico.
-
-Los problemas principales incluían:
-
-- **Datos sucios:** inconsistencias en fechas y textos.
-- **Claves inexistentes:** dificultad para cruzar ventas con stock histórico.
-- **Silos de información:** tablas desconectadas.
+- ¿Cómo evolucionan **ventas** y **ticket promedio** por periodo?
+- ¿Qué **marcas** concentran facturación en el tramo reciente?
+- ¿Qué **familias de piezas** rotan más por unidades?
+- ¿Qué tan “publicable” está el catálogo (completitud técnica / coherencia)?
 
 ---
 
-## 🛠️ La Solución Técnica
+## 🧩 Qué incluye el dashboard
 
-Implementé una solución utilizando **Power BI** y **Excel**, enfocándome en tres pilares:
+### 1) 🌍 Vista General (2017–2032 Demo)
 
-### 1. Ingeniería de Datos (ETL)
+- Filtros por **AÑO (Demo)**, **Periodo ERP** (*Pre-ERP, Transición, Consolidación, Optimización*) y **Marca**.  
+- KPIs: **Importe Neto € (Demo)**, **Ventas Netas (Demo)**, **Ticket Promedio Neto € (Demo)**.  
+- Calidad de datos:
+  - **Datos técnicos completos** (*marca / modelo / motor*).
+  - **Coherencia Alta vs Venta** (control de consistencia entre alta de piezas y ventas).  
+- Ranking de rotación histórica: **Top piezas vendidas 2010–2025 (Demo)** por unidades (familias típicas de alta demanda como alternadores, faros, baterías, pilotos, llantas, amortiguadores, etc.).
 
-Para normalizar la información, creé procesos que logran:
+### 2) 📆 Vista Performance Reciente (2027–2032 Demo)
 
-- Generar claves sintéticas (`VehiculoKey`) para unificar tablas.
-- Normalizar el campo "Estado Stock".
-- Crear indicadores de calidad (ej. `Coherente_AltaVsVenta`).
+- **Evolución mensual** del Importe Neto € (Demo) para detectar tendencia y estacionalidad.
+- **Top 10 marcas** por Importe Neto € (Demo) para identificar concentración de facturación.
+- **Top 20 piezas** por unidades vendidas (Demo) con foco en carrocería/rotación (paragolpes, faros, llantas, pilotos, retrovisores, aletas, capó, etc.).
 
-### 2. Modelado Avanzado (DAX)
+### 3) 🔍 “Radiografía de Marca” (ejemplo: TOYOTA)
 
-Debido a las limitaciones de las claves originales, el modelo relacional estándar no era suficiente.
-
-> **Highlight técnico:** utilicé la función **`TREATAS`** en DAX para manejar dimensiones desconectadas.  
-> Esto permitió propagar filtros entre tablas que no tenían una relación física directa.
-
----
-
-## 📊 Resultados e Insights Clave
-
-El dashboard final se dividió en dos lienzos estratégicos.
-
-### A. Diagnóstico de Calidad de Datos
-
-Logramos visualizar por primera vez la "salud" de la información:
-
-- **Índice de calidad:** semáforo que evalúa completitud y consistencia.
-- **Problema "Genérico":** se detectó un volumen crítico de ventas categorizadas como "GENÉRICA", lo que impedía el análisis de rentabilidad. Esto impulsó un cambio inmediato en la política de registro.
-
-### B. Rendimiento Comercial (2020–2025)
-
-Se habilitó la visión estratégica del negocio mediante:
-
-- **Top 10 marcas:** identificación de marcas que sostienen la facturación.
-- **Análisis de rotación:** piezas con mayor salida real.
-- **Tendencias:** análisis de estacionalidad y ticket promedio.
+- KPIs específicos de la marca para 2027–2032 (Demo).
+- Curva mensual de ventas + ranking de piezas más vendidas por unidades.
+- Útil para decisiones operativas: **priorización de catalogación**, **foco de stock**, **mejoras de ficha** y **control de devoluciones**.
 
 ---
 
-## 🔮 Conclusión y Próximos Pasos
+## 🧠 Modelado y enfoque técnico (por qué esto es “accionable”)
 
-Este proyecto sentó las bases para una cultura de datos en la empresa. Los siguientes pasos incluyen:
+El informe está construido sobre **exportes de ERP + Excel**, aplicando:
 
-1. Transición de Excel a conexión directa **SQL**.
-2. Construcción de tablas maestras estandarizadas.
-3. Integración de costes operativos para calcular márgenes reales.
+- **Tablas CLEAN** (normalización y estandarización de campos críticos).
+- Dimensiones de **Fecha / Periodo ERP / Vehículo / Pieza / Marca**.
+- Medidas **DAX** para KPIs y calidad.
+- Patrones avanzados para lidiar con origen “imperfecto”: **dimensiones desconectadas + TREATAS**, habilitando análisis estable aún con claves inconsistentes o relaciones frágiles.
 
 ---
 
-> *Este proyecto demuestra cómo técnicas avanzadas de modelado pueden extraer valor estratégico incluso de sistemas heredados.*
+## ⭐ Highlights (valor para negocio)
 
-![Vista previa del dashboard](/assets/img/bgimage.png)
+- ✅ **Visibilidad ejecutiva en 5 minutos:** performance + calidad en una sola pantalla.
+- 🧹 **Calidad de datos como KPI:** la ficha técnica deja de ser “opinión” y se vuelve medible.
+- 🎯 **Priorización operativa:** identifica qué marcas/piezas conviene atacar primero para maximizar ventas futuras.
+- 🧱 **Base escalable:** deja preparado el camino para migración a **SQL / ETL formal** sin rehacer el reporting.
 
-*(Nota: datos anonimizados por confidencialidad. Valores ajustados / escala aplicada para publicación.)*
+---
+
+## 🖼️ Capturas del demo (reemplazar por imágenes)
+
+> Exportá 4–6 capturas desde Power BI y súbelas a tu repo, por ejemplo:
+`/assets/img/projects/ventas-historicas/`
+
+- `01-general.png` (vista general)
+- `02-top-piezas.png` (top piezas 2010–2025)
+- `03-performance-2027-2032.png` (tendencia mensual + top marcas)
+- `04-toyota.png` (radiografía TOYOTA)
+
+*(Opcional: reemplazar por 1 GIF + 2 capturas para hacerlo más “scrolleable” para RRHH.)*
+
+---
+
+## 🧰 Stack
+
+📊 **Power BI** · 🧠 **DAX** · 🧩 **Data Modeling** · 🧼 **ETL (Power Query)** · 📄 **Excel/ERP Exports** · 🧪 **Calidad de Datos**
