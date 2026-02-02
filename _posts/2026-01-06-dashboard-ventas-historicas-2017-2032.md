@@ -6,6 +6,7 @@ categories: [powerbi, data-analysis, bi]
 project_type: bi
 tags: [Power BI, DAX, Data Quality, Data Modeling, ETL, Excel, Business Intelligence]
 image: "/assets/img/thumb.png"
+permalink: /powerbi/data-analysis/bi/2026/01/06/dashboard-ventas-historicas_2010_2025.html
 ---
 
 Proyecto BI end-to-end para una **empresa de repuestos usados**.  
