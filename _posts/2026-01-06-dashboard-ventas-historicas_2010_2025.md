@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "📈 Demo Power BI: Ventas Históricas + Calidad de Datos (Repuestos Usados)"
+title: "📈 Ventas Históricas + Calidad de Datos (Repuestos Usados)"
 date: 2026-01-06 12:00:00 -0300
 categories: [powerbi, data-analysis, bi]
 project_type: bi
