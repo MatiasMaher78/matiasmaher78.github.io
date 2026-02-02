@@ -69,9 +69,16 @@ El informe está construido sobre **exportes de ERP + Excel**, aplicando:
 
 ---
 
-## 🖼️ Capturas del demo 
+## 🖼️ Capturas del Dashboard
 
+### 1) Calidad de Datos – General
+![Calidad de Datos - General](/assets/img/projects/ventas-historicas/01-calidad-general.png)
 
+### 2) Ventas – General
+![Ventas - General](/assets/img/projects/ventas-historicas/02-ventas-general.png)
+
+### 3) Ventas – Toyota
+![Ventas - Toyota](/assets/img/projects/ventas-historicas/03-ventas-toyota.png)
 
 ---
 
