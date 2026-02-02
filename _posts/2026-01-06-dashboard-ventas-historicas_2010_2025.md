@@ -8,19 +8,19 @@ tags: [Power BI, DAX, Data Quality, Data Modeling, ETL, Excel, Business Intellig
 image: "/assets/img/thumb.png"
 ---
 
-Proyecto BI end-to-end para una **empresa de repuestos usados** (datos anonimizados: importes escalados y años desplazados).  
-Dashboard en Power BI para **entender performance comercial** y **medir calidad del catálogo** en segundos, incluso con exportes limitados de ERP.
+Proyecto BI end-to-end para una **empresa de repuestos usados**.  
+Dashboard en Power BI para **entender performance comercial** y **medir calidad del catálogo** en segundos, teniendo en cuenta que la extraccion de datos fue limitada desde el ERP.
 
 <!--more-->
 
-## 🎯 Objetivo del demo
+## 🎯 Objetivo del proyecto
 
 Este informe permite responder rápido preguntas típicas de dirección y operaciones:
 
 - ¿Cómo evolucionan **ventas** y **ticket promedio** por periodo?
 - ¿Qué **marcas** concentran facturación en el tramo reciente?
 - ¿Qué **familias de piezas** rotan más por unidades?
-- ¿Qué tan “publicable” está el catálogo (completitud técnica / coherencia)?
+- ¿Cual es la calidad de datos para publicar las piezas? 
 
 ---
 
@@ -33,7 +33,7 @@ Este informe permite responder rápido preguntas típicas de dirección y operac
 - Calidad de datos:
   - **Datos técnicos completos** (*marca / modelo / motor*).
   - **Coherencia Alta vs Venta** (control de consistencia entre alta de piezas y ventas).  
-- Ranking de rotación histórica: **Top piezas vendidas 2010–2025 (Demo)** por unidades (familias típicas de alta demanda como alternadores, faros, baterías, pilotos, llantas, amortiguadores, etc.).
+- Ranking de rotación histórica: **Top piezas vendidas 2017–2032 (Demo)** por unidades (familias típicas de alta demanda como alternadores, faros, baterías, pilotos, llantas, amortiguadores, etc.).
 
 ### 2) 📆 Vista Performance Reciente (2027–2032 Demo)
 
@@ -69,15 +69,9 @@ El informe está construido sobre **exportes de ERP + Excel**, aplicando:
 
 ---
 
-## 🖼️ Capturas del demo (reemplazar por imágenes)
+## 🖼️ Capturas del demo 
 
-> Exportá 4–6 capturas desde Power BI y súbelas a tu repo, por ejemplo:
-`/assets/img/projects/ventas-historicas/`
 
-- `01-general.png` (vista general)
-- `02-top-piezas.png` (top piezas 2010–2025)
-- `03-performance-2027-2032.png` (tendencia mensual + top marcas)
-- `04-toyota.png` (radiografía TOYOTA)
 
 ---
 
