@@ -95,6 +95,8 @@ Este validador es una pieza dentro de un pipeline mayor:
 
 ### ✅ Captura del resultado final 
 
+![Proceso de filas, ejemplo](/assets/img/projects/validacion-oem/validacion-oem-busqueda.png)
+
 ![Output](/assets/img/projects/validacion-oem/validacion-oem.png)
 
 ---
