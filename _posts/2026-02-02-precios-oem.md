@@ -98,8 +98,10 @@ Pensado como un módulo dentro de un pipeline mayor:
 
 ## 🖼️ Capturas del resultado final
 
+### 1) Input
 ![Inputl](/assets/img/projects/precios-oem/input-precios-oem.png)
 
+### 2) Output
 ![Output](/assets/img/projects/precios-oem/output-precios-oem.png)
 
 ---
