@@ -93,6 +93,9 @@ Este validador es una pieza dentro de un pipeline mayor:
 
 ---
 
+### ✅ Output final 
+![Calidad de datos - General](/assets/img/projects/validacion_oem.png)
+
 ## 🧰 Stack
 
 🐍 **Python** · 🎭 **Playwright** · 📊 **Pandas + OpenPyXL** · 🧪 **CLI** · ⚡ **caché** · 💾 **autosave**  
