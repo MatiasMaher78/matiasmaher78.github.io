@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "🔎 Validación OEM en Stock (Ecooparts): Eliminando Falsos Positivos a Escala"
+title: "🔎 Validación OEM en Stock: Eliminando Falsos Positivos a Escala"
 date: 2026-01-21 12:00:00 -0300
 categories: [automation, python, scraping]
 project_type: automation
@@ -20,7 +20,7 @@ La pregunta que disparó este proyecto fue simple y concreta:
 
 > **¿Cómo eliminamos los falsos positivos de OEM a escala?**
 
-Un falso positivo (OEM “aparentemente validada” pero incorrecta) termina generando:
+Un falso positivo termina generando:
 
 - 🧨 publicaciones **rotas** o difíciles de encontrar
 - 🧾 títulos / descripciones inconsistentes
@@ -31,7 +31,7 @@ Un falso positivo (OEM “aparentemente validada” pero incorrecta) termina gen
 
 ## 🧠 ¿Qué hace el programa?
 
-Este script automatiza la **validación masiva de referencias OEM** contra un verificador (Ecooparts), tomando como input un **Excel de stock**.
+Este script automatiza la **validación masiva de referencias OEM** contra un verificador, tomando como input un **Excel de stock**.
 
 Para cada fila:
 
@@ -61,9 +61,9 @@ Mejoras clave:
 
 ---
 
-## 🧪 Caso real: Stock Ford (4.907 filas)
+## 🧪 Caso real: Stock Ford (8.542 filas)
 
-Se ejecuta sobre un stock completo (4.907 filas), validando OEM original/paralelo a escala y generando un output **auditable** para:
+Se ejecuta sobre un stock completo, validando OEM original/paralelo a escala y generando un output **auditable** para:
 
 - detectar publicaciones débiles o inconsistentes
 - priorizar limpieza de datos (nombre de pieza / descripción / OEM)
