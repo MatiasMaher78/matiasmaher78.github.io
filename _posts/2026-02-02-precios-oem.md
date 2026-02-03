@@ -23,10 +23,10 @@ Este proyecto nace para darle a la empresa **autonomía real**: obtener automát
 
 A partir de un archivo de stock (**CSV o Excel**), el script toma la columna **OEM** y, para cada fila:
 
-- Busca en **Ecooparts** simulando navegación real (**URL parametrizada + codificación Base64**).
+- Busca en la web simulando navegación real (**URL parametrizada + codificación Base64**).
 - Extrae en modo masivo:
   - **Units**: proxy de oferta (cantidad de resultados / enlaces detectados).
-  - **Min Price / Max Price**: rango de mercado en EUR (**parse robusto** de formatos europeos).
+  - **Min Price / Max Price**: rango de mercado (**parse robusto**).
 - Devuelve un output limpio listo para pricing:
   - `ID | OEM | Units | Max Price | Min Price`
 
