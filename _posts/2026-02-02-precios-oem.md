@@ -19,6 +19,8 @@ Hacerlo manual o depender de terceros frena la operación, encarece el proceso y
 
 Este proyecto nace para darle a la empresa **autonomía real**: obtener automáticamente un **rango de precios de mercado** y una señal de **oferta/demanda por referencia**, como base para una **lista de precios dinámica** integrada a procesos internos.
 
+---
+
 ## ✅ Qué hace el programa
 
 A partir de un archivo de stock (**CSV o Excel**), el script toma la columna **OEM** y, para cada fila:
@@ -31,6 +33,8 @@ A partir de un archivo de stock (**CSV o Excel**), el script toma la columna **O
   - `ID | OEM | Units | Max Price | Min Price`
 
 Este output se usa como insumo directo para reglas internas: **margen objetivo, rotación, stock disponible, prioridad comercial**, etc.
+
+---
 
 ## 🧩 Diseño técnico (producción-friendly)
 
@@ -68,7 +72,9 @@ Si una query devuelve 0 resultados, el sistema reintenta con el **token alfanum�
 - Detección de separador (`;` vs `,`) + fallback de encoding.
 - Si hay Excel, intenta leerlo con dependencias estándar.
 
-## 📈 Impacto (por qué importa)
+---
+
+## 📈 Impacto
 
 Este script convierte un proceso manual y dependiente en un flujo **repetible y escalable**:
 
@@ -76,6 +82,8 @@ Este script convierte un proceso manual y dependiente en un flujo **repetible y 
 - Provee señales de mercado (**rango + oferta**) con consistencia.
 - Acelera iteraciones de pricing sin pedir datos a terceros.
 - Deja lista la base para una **lista de precios dinámica**.
+
+---
 
 ## 🗺️ Roadmap (integración futura)
 
@@ -85,6 +93,16 @@ Pensado como un módulo dentro de un pipeline mayor:
 2. **MVP ERP + OCR** → cargar/validar OEM desde imágenes y actualizar fichas en ERP.  
 3. **Pricing dinámico** → `precio = f(rango mercado, stock, rotación, demanda, margen)`  
 4. **Automatización de publicación** → actualización masiva con trazabilidad.
+
+---
+
+## 🖼️ Capturas del resultado final
+
+![Inputl](/assets/img/projects/precios-oem/input-precios-oem.png)
+
+![Output](/assets/img/projects/precios-oem/output-precios-oem.png)
+
+---
 
 ## 🧰 Stack
 
