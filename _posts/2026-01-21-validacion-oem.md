@@ -71,7 +71,7 @@ Se ejecuta sobre un stock completo, validando OEM original/paralelo a escala y g
 
 ---
 
-## ⭐ Impacto en operación (por qué importa)
+## ⭐ Impacto en operación
 
 Con esta validación automatizada se logra:
 
@@ -95,11 +95,11 @@ Este validador es una pieza dentro de un pipeline mayor:
 
 ### ✅ Captura del resultado final 
 
-![Output](/assets/img/projects/validacion-oem.png)
+![Output](/assets/img/projects/validacion-oem/validacion-oem.png)
 
 ---
 
 ## 🧰 Stack
 
 🐍 **Python** · 🎭 **Playwright** · 📊 **Pandas + OpenPyXL** · 🧪 **CLI** · ⚡ **caché** · 💾 **autosave**  
-Diseño orientado a **robustez** (tolerancia a fallos, trazabilidad) y **escala** (miles de filas).
+Diseño orientado a **robustez** y **escala**.
