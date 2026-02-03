@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "💶 Precios_OEM — Automatización de pricing para autopartes usadas"
+title: "💶 Calculo de Precios OEM — Automatización de pricing"
 date: 2026-01-23 12:00:00 -0300
 categories: [automation, scripts]
 project_type: automation
@@ -8,7 +8,7 @@ tags: [Python, Pandas, Playwright, Web Scraping, Pricing, Automation]
 image: "/assets/img/thumb.png"
 ---
 
-🚀 Automatización de **pricing (sin IVA)** para autopartes usadas: obtiene **rango de mercado (Min/Max)** y una señal de **oferta (Units)** por referencia OEM, con scraping robusto y trazabilidad.
+🚀 Automatización de **pricing** para autopartes usadas: obtiene **rango de mercado (Min/Max)** y una señal de **oferta (Units)** por referencia OEM, con scraping robusto y trazabilidad.
 
 <!--more-->
 
