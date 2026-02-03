@@ -1,42 +1,99 @@
 ---
 layout: post
-title: "🔧 Validación OEM Automática para Catálogo de Autopartes"
-date: 2026-01-21 
-categories: [automation, scripts]
+title: "🔎 Validación OEM en Stock (Ecooparts): Eliminando Falsos Positivos a Escala"
+date: 2026-01-21 12:00:00 -0300
+categories: [automation, python, scraping]
 project_type: automation
 image: "/assets/img/thumb.png"
-tags: [Python, Pandas, Playwright, Web Scraping, Data Validation, Autosave]
+tags: [Python, Pandas, Playwright, Web Scraping, Data Validation, Data Quality, Autosave, CLI]
 ---
 
-🚀 Automatiza la **validación de referencias OEM** para reducir *falsos positivos* y asegurar publicaciones correctas en eCommerce.
+🚀 De “creer” que una OEM está bien… a **saberlo con evidencia y trazabilidad**.  
+Este proyecto convierte una validación manual (lenta y propensa a errores) en un proceso **repetible, auditable y escalable** para catálogos de repuestos usados.
 
 <!--more-->
 
-## 🧠 ¿Qué hace?
+## 🧩 Contexto / problema
 
-Procesa un **Excel de stock** y verifica, para cada referencia OEM (original/paralelo), cuántas **coincidencias reales** existen en la plataforma de mercado mediante búsqueda automatizada.  
-Clasifica resultados con un **semáforo de calidad** para priorizar revisiones y evitar piezas mal publicadas:
+En catálogos de repuestos usados, el dolor más grande no es “tener datos”, sino **confiar en ellos**.  
+La pregunta que disparó este proyecto fue simple y concreta:
 
-- 🔴 **0 coincidencias** → *Revisar*  
-- 🟡 **1–2 coincidencias** → *Atención*  
-- 🟢 **≥ 3 coincidencias** → *OK*
+> **¿Cómo eliminamos los falsos positivos de OEM a escala?**
 
-Incluye:
-- 🧩 **Ejecución por lotes** (batch) para stocks grandes  
-- ⚡ **Caché** para acelerar consultas repetidas  
-- 💾 **Autosaves periódicos** para tolerancia a fallos en corridas largas  
+Un falso positivo (OEM “aparentemente validada” pero incorrecta) termina generando:
+
+- 🧨 publicaciones **rotas** o difíciles de encontrar
+- 🧾 títulos / descripciones inconsistentes
+- 💸 pricing desalineado
+- 🧯 pérdida de confianza en el trabajo operativo
 
 ---
 
-## ⭐ Highlights
+## 🧠 ¿Qué hace el programa?
 
-- ✅ **Calidad de datos:** reduce errores de carga (falsos positivos) *antes* de publicar, elevando la confiabilidad del catálogo.  
-- ⏱️ **Eficiencia operativa:** permite validaciones masivas por stock/marca y habilita un flujo **incremental** para piezas nuevas posteriores a la fecha de validación.  
-- 🛡️ **Listo para producción:** parámetros por CLI, reuso de navegador (performance), caché por código, manejo de cookies/scroll/paginación y guardado parcial automático.
+Este script automatiza la **validación masiva de referencias OEM** contra un verificador (Ecooparts), tomando como input un **Excel de stock**.
+
+Para cada fila:
+
+1. Lee **OEM original** y **OEM paralelo** (si existen).
+2. Construye una **URL de búsqueda real** (parámetros equivalentes a navegación humana).
+3. Navega con **Playwright (headless)**, aplica **scroll + paginación** y **cuenta coincidencias**.
+4. Devuelve una señal tipo “semáforo” (0–N) en columnas:
+   - `Validacion Original`
+   - `Validacion Paralelo`
+
+✅ Resultado: una señal objetiva de si esa OEM tiene **presencia real** y cuánta **evidencia** hay.
+
+---
+
+## ⚙️ Optimización aplicada (sin perder efectividad)
+
+El objetivo fue mantener exactitud, pero reducir tiempos en ejecuciones grandes.
+
+Mejoras clave:
+
+- ♻️ **Reuso de browser/context/page** para miles de búsquedas (menos overhead por fila).
+- ⚡ **Caché por OEM**: si el código se repite, **no se vuelve a consultar**.
+- 🧼 **Reglas anti-ruido**: evita búsquedas con caracteres problemáticos (espacios, `-`, `/`, etc.) para reducir consultas inválidas.
+- 💾 **Autosave incremental**: guarda parciales cada *N* filas para tolerar cortes y mantener trazabilidad.
+- 🛑 **Early stop por tope de interés**: si ya hay suficientes coincidencias (ej. 30), corta paginación/scroll y pasa a la siguiente fila  
+  → acelera mucho sin cambiar la lógica del semáforo.
+
+---
+
+## 🧪 Caso real: Stock Ford (4.907 filas)
+
+Se ejecuta sobre un stock completo (4.907 filas), validando OEM original/paralelo a escala y generando un output **auditable** para:
+
+- detectar publicaciones débiles o inconsistentes
+- priorizar limpieza de datos (nombre de pieza / descripción / OEM)
+- asegurar que el catálogo publicado refleja el stock real con calidad
+
+---
+
+## ⭐ Impacto en operación (por qué importa)
+
+Con esta validación automatizada se logra:
+
+- ✅ **Confianza:** sabemos qué piezas están bien publicadas y encontrables.
+- ✅ **Calidad de catálogo:** mejora de título, descripción y normalización de OEM.
+- ✅ **Precio mejor alineado:** al eliminar incertidumbre de publicación, el pricing posterior es más consistente.
+- ✅ **Priorización:** identifica dónde actuar primero (OEMs sin evidencia o con evidencia baja).
+
+---
+
+## 🧭 Roadmap
+
+Este validador es una pieza dentro de un pipeline mayor:
+
+- 📸 **MVP ERP–OCR:** extracción automática de OEM y datos desde imágenes/documentos.
+- 📊 **Scraping de precios semanal:** cálculo de precio competitivo.
+- 📈 **Reglas de pricing variable:** stock interno + competencia + objetivos de margen.
+- 🔗 **Cruce publicación + stock + competencia** para decisiones de catálogo basadas en datos.
 
 ---
 
 ## 🧰 Stack
 
-🐍 **Python** · 📊 **Pandas** (Excel I/O) · 🎭 **Playwright** (automatización web) · 🧪 **CLI** (argparse) · ⚡ caché + 💾 autosave
-
+🐍 **Python** · 🎭 **Playwright** · 📊 **Pandas + OpenPyXL** · 🧪 **CLI** · ⚡ **caché** · 💾 **autosave**  
+Diseño orientado a **robustez** (tolerancia a fallos, trazabilidad) y **escala** (miles de filas).
