@@ -93,9 +93,9 @@ Este validador es una pieza dentro de un pipeline mayor:
 
 ---
 
-### ✅ Captura del Output final 
+### ✅ Captura del resultado final 
 
-(/assets/img/projects/validacion_oem.png)
+![Output](/assets/img/projects/validacion_oem.png)
 
 ---
 
