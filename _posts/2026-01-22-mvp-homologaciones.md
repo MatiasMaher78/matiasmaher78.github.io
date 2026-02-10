@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "🚗 MVP Homologación de Vehículos — Consolidación técnica multi-fuente"
+title: "🚗 MVP Homologación de Vehículos"
 date: 2026-01-22 12:00:00 -0300
 categories: [mvp, product]
 project_type: mvp
@@ -25,7 +25,7 @@ A medida que aumenta la presión por **acortar ciclos de validación** y reducir
 
 ---
 
-## 🛠️ Qué hace el MVP (valor operativo)
+## 🛠️ Qué hace el MVP
 
 El sistema permite:
 
@@ -38,7 +38,7 @@ El output actúa como una **ficha técnica homologada**, con origen controlado y
 
 ---
 
-## ⚙️ Cómo lo hace (alto nivel)
+## ⚙️ Cómo lo hace
 
 **Backend (FastAPI)**
 - Scraping concurrente por fuente.
