@@ -1,66 +1,126 @@
 ---
 layout: post
-title: "🚗 MVP Homologación de Vehículos: Automatización de extracción y emisión de fichas"
+title: "🚗 MVP Homologación de Vehículos — Consolidación técnica multi-fuente"
 date: 2026-01-22 12:00:00 -0300
 categories: [mvp, product]
 project_type: mvp
+tags: [MVP, Product, FastAPI, React, Web Scraping, Data Normalization, Automation]
 image: "/assets/img/thumb.png"
-tags: [MVP, Product, Workflow Automation, OCR, Data Extraction, Python, ERP Integration]
-
-
-# Opcional (recomendado)
-github: ""
-demo: ""
-status: "mvp"   # poc | mvp | production
-stack: []
 ---
 
-🚀 **Pitch:** qué problema resuelve, para quién, y el impacto esperado (en 1–2 líneas, sin datos sensibles).
+🚀 MVP para **automatizar la recolección, normalización y consolidación de especificaciones técnicas de vehículos** desde múltiples fuentes web, orientado a equipos de homologación y validación técnica.
 
 <!--more-->
 
-## 🧩 Problema
-- Contexto del negocio o usuario
-- Dolor principal que hoy no está resuelto
-- Por qué es relevante resolverlo ahora
+## 🧠 Contexto / problema
 
-## 💡 Solución (MVP)
-- Qué hace el producto
-- Cómo lo hace (alto nivel)
-- Qué lo diferencia de alternativas manuales o existentes
+En procesos de homologación, los datos técnicos de un vehículo suelen estar **dispersos en varios portales**, con **formatos, nomenclaturas y niveles de detalle distintos**.
 
-## 🧱 Alcance
+El trabajo manual de comparar fuentes:
+- consume mucho tiempo,
+- es propenso a errores,
+- y dificulta la **trazabilidad por expediente**.
+
+A medida que aumenta la presión por **acortar ciclos de validación** y reducir retrabajos documentales, este enfoque deja de escalar.
+
+---
+
+## 🛠️ Qué hace el MVP (valor operativo)
+
+El sistema permite:
+
+- Ingresar hasta **3 URLs de referencia** por vehículo.
+- Ejecutar **scraping concurrente** de cada fuente.
+- **Unificar campos técnicos clave** en una vista única editable.
+- Exportar el resultado final en una **plantilla documental** lista para uso operativo.
+
+El output actúa como una **ficha técnica homologada**, con origen controlado y consistencia entre fuentes.
+
+---
+
+## ⚙️ Cómo lo hace (alto nivel)
+
+**Backend (FastAPI)**
+- Scraping concurrente por fuente.
+- Transformación de cada origen a un **esquema común**.
+- Reglas simples de **priorización por campo**.
+- Endpoints autenticados para procesamiento y exportación.
+
+**Frontend (React)**
+- Autenticación de usuarios.
+- Vista comparativa: datos extraídos / consolidados.
+- Edición manual del valor final por campo.
+- Historial de exportaciones por usuario.
+
+---
+
+## ⭐ Diferenciales frente al proceso manual
+
+- 🔗 **Un solo flujo**: extracción + normalización + priorización + exportación.
+- 🧾 **Trazabilidad**: historial de descargas y ediciones por usuario.
+- ⏱️ **Reducción drástica de tiempos** frente a comparación manual.
+- 📦 **Base escalable** para futuras integraciones y reglas avanzadas.
+
+---
+
+## 🧱 Alcance del MVP
+
 **Incluye**
-- Funcionalidad clave 1
-- Funcionalidad clave 2
+- Scraping multi-fuente en paralelo.
+- Consolidación por campo técnico.
+- Edición del valor final.
+- Exportación documental.
+- Autenticación y seguimiento básico.
 
 **No incluye**
-- Lo que conscientemente quedó fuera del MVP
+- Integraciones directas con ERP / PLM / CRM.
+- Motor avanzado de reglas por país o normativa específica.
 
-## ⚙️ Arquitectura (alto nivel)
-- Frontend / UI
-- Backend / lógica
-- Datos / integraciones
+---
 
-## 📈 Métrica de éxito
-- KPI principal del MVP
-- Métrica secundaria (ahorro de tiempo, reducción de errores, etc.)
+## 📈 Métricas de éxito
+
+- **KPI principal:** tiempo promedio desde URLs → ficha homologada exportada.
+- **Secundaria:** reducción de discrepancias entre fuentes y retrabajo manual por expediente.
+
+---
 
 ## 🗺️ Roadmap
-- Próximo paso inmediato
-- Iteración 2
-- Iteración 3
+
+**Siguiente iteración**
+- Validaciones automáticas de calidad de dato.
+- Observabilidad del pipeline de scraping.
+
+**Iteración 2**
+- Reglas configurables por mercado / modelo.
+- Plantillas de salida adicionales.
+
+**Iteración 3**
+- Integración vía API con sistemas internos.
+- Panel analítico de productividad y errores.
+
+---
 
 ## 🧪 Estado actual
-- `{{ page.status }}`
+
+MVP funcional con:
+- autenticación,
+- procesamiento multi-fuente,
+- edición manual,
+- exportación de fichas técnicas.
+
+---
 
 ## 🧰 Stack
-- {{ page.stack }}
+
+- **Frontend:** React, TypeScript, Vite, TailwindCSS, Axios  
+- **Backend:** FastAPI, Uvicorn, pandas, BeautifulSoup / requests  
+- **Plataforma:** Supabase (Auth + DB), docxtpl / python-docx
+
+---
 
 ## 🔒 Notas de confidencialidad
-- Datos anonimizados
-- Valores escalados / endpoints omitidos
 
-## 🔗 Links
-{% if page.github and page.github != "" %}- Repo: {{ page.github }}{% endif %}
-{% if page.demo and page.demo != "" %}- Demo / Video: {{ page.demo }}{% endif %}
+- Datos anonimizados.
+- Valores y endpoints omitidos.
+- Sin exposición de credenciales o información sensible.
