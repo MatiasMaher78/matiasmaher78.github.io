@@ -1,98 +1,164 @@
 ---
 layout: post
-title: "💶 Calculo de Precios OEM — Automatización de pricing"
+title: "💶 Precios OEM: Automatización de pricing para autopartes usadas"
 date: 2026-01-23 12:00:00 -0300
-categories: [automation, scripts]
+categories: [automation, python, scraping]
 project_type: automation
-tags: [Python, Pandas, Playwright, Web Scraping, Pricing, Automation]
+tags: [Python, Pandas, Playwright, Web Scraping, Pricing, Automation, Testing]
 image: "/assets/img/thumb.png"
 ---
 
-🚀 Automatización de **pricing** para autopartes usadas: obtiene **rango de mercado (Min/Max)** y una señal de **oferta (Units)** por referencia OEM, con scraping robusto y trazabilidad.
+🚀 Automatización de pricing para autopartes usadas: procesa archivos de stock, consulta mercado y devuelve un output consolidado con **rango de precios sin IVA** y una señal de **oferta** por referencia OEM.
 
 <!--more-->
 
-## 🎯 Contexto / problema
+## 🧠 Contexto / problema
 
-En un desguace, el pricing no es “poner un número”: es **decidir rápido y con datos** en un mercado donde la oferta cambia día a día y los precios publicados suelen venir con **inconsistencias** (formatos, descuentos, fichas incompletas).  
-Hacerlo manual o depender de terceros frena la operación, encarece el proceso y limita la escalabilidad.
+En un desguace, poner precio no es solo completar un campo: implica tomar decisiones rápidas sobre piezas con distinta rotación, competencia cambiante y publicaciones con calidad dispar.
 
-Este proyecto nace para darle a la empresa **autonomía real**: obtener automáticamente un **rango de precios de mercado** y una señal de **oferta/demanda por referencia**, como base para una **lista de precios dinámica** integrada a procesos internos.
+Cuando este trabajo se hace de forma manual, aparecen varios problemas:
 
----
+- tiempo operativo alto para revisar pieza por pieza
+- criterios poco consistentes entre búsquedas
+- dependencia de consultas repetitivas
+- dificultad para escalar el proceso sobre lotes grandes
 
-## ✅ Qué hace el programa
-
-A partir de un archivo de stock (**CSV o Excel**), el script toma la columna **OEM** y, para cada fila:
-
-- Busca en la web simulando navegación real (**URL parametrizada + codificación Base64**).
-- Extrae en modo masivo:
-  - **Units**: proxy de oferta (cantidad de resultados / enlaces detectados).
-  - **Min Price / Max Price**: rango de mercado (**parse robusto**).
-- Devuelve un output limpio listo para pricing:
-  - `ID | OEM | Units | Max Price | Min Price`
-
-Este output se usa como insumo directo para reglas internas: **margen objetivo, rotación, stock disponible, prioridad comercial**, etc.
+Este proyecto nace para resolver esa fricción: transformar una búsqueda manual de mercado en un flujo **repetible, auditable y usable como base de pricing**.
 
 ---
 
-## 🧩 Diseño técnico (producción-friendly)
+## ⚙️ Qué hace el programa
 
-### 🌐 Automatización web con Playwright (Chromium)
-- **Headless** por defecto (y modo **headful** para debug).
-- **Locale** y **user-agent** realistas para consistencia.
-- Manejo automático de **cookies**.
+A partir de un archivo de entrada en **CSV, XLSX o XLS**, el script procesa la columna OEM y genera una salida consolidada con información útil para pricing.
 
-### ⚡ Extracción optimizada (performance sin perder estabilidad)
-- Bloqueo de recursos no esenciales: imágenes, fuentes, estilos, ads/analytics.
-- Paginación limitada (`max_pages=5`) + scroll controlado (`scroll_rounds=3`).
-- **Early exit** cuando:
-  - ya hay suficientes precios (≥ 50),
-  - la página devuelve menos que `per_page`,
-  - o no aparecen precios.
+Para cada referencia:
 
-### 🧠 Fix crítico de timing 
-Se agregó una **espera inicial** después de `goto()` para permitir que la web renderice cards vía JavaScript.  
-Sin esto, se veía HTML “básico” pero el scraper obtenía **0 links/precios** (fallo silencioso).
+- realiza la búsqueda automatizada en la web
+- detecta resultados válidos
+- extrae precios publicados sin IVA
+- calcula un rango de mercado
+- devuelve una señal de oferta según la cantidad de coincidencias encontradas
 
-### 🛡️ Fallback inteligente (evita falsos positivos)
-Si una query devuelve 0 resultados, el sistema reintenta con el **token alfanumérico más relevante** (ej. OEM/código), evitando palabras genéricas del nombre de pieza.
+### Output principal
 
-**Ejemplo:**  
-`"CAJA MARIPOSA AIRE 9640795280" → reintento con 9640795280`
+El resultado final queda listo para análisis o reglas internas de precio, con campos del tipo:
 
-### 🧾 Trazabilidad y debug
-- Si una fila queda sin resultados, puede **guardar HTML** de la búsqueda en `Output/` para diagnosticar cambios del sitio o edge cases.
+- `OEM`
+- `Units`
+- `Min Price`
+- `Max Price`
 
-### ♻️ Caché persistente
-- Guarda `Output/cache_oem.json` para reutilizar resultados entre ejecuciones y **acelerar corridas repetidas** (clave en lotes grandes).
+Esto permite usar el output como insumo para decisiones posteriores, por ejemplo:
 
-### 📥 Input robusto (CSV-first)
-- Prioriza **CSV** para evitar dependencias en entornos restringidos.
-- Detección de separador (`;` vs `,`) + fallback de encoding.
-- Si hay Excel, intenta leerlo con dependencias estándar.
+- margen objetivo
+- prioridad comercial
+- stock disponible
+- rotación esperada
+- reglas de pricing dinámico
+
+---
+
+## 🛠️ Diseño técnico
+
+### Navegación automatizada con Playwright
+
+La herramienta utiliza **Playwright con Chromium** para ejecutar búsquedas de forma consistente y reproducible, con soporte para modo headless y headful según necesidad de operación o debugging.
+
+### Procesamiento orientado a lotes
+
+El script fue pensado para trabajar sobre archivos reales de operación, con estructura simple de carpetas:
+
+- `Input/`
+- `Output/`
+- `Done/`
+
+Además prioriza **CSV** cuando hay más de un formato disponible, para facilitar su uso en entornos más restringidos o flujos batch.
+
+### Robustez en el cálculo de precios
+
+Uno de los puntos más importantes del proyecto fue mejorar la calidad del rango devuelto, evitando que el resultado final quede contaminado por publicaciones irrelevantes o valores extremos.
+
+#### 1) Filtro por relevancia de título
+
+Como la búsqueda del sitio es de texto libre, una OEM o query puede devolver piezas de otra categoría. Para reducir ese ruido, cada resultado se contrasta contra la búsqueda original y solo se conservan los títulos suficientemente alineados.
+
+En la práctica, esto ayuda a evitar casos como:
+
+- buscar un turbo y recibir un motor completo
+- buscar una referencia específica y capturar piezas que solo comparten una palabra genérica
+
+#### 2) Filtro estadístico de outliers
+
+Sobre los precios recolectados se aplica un segundo filtro usando percentiles **P5/P95**, descartando valores extremos antes de informar el rango final.
+
+Esto mejora la señal de pricing y reduce el impacto de publicaciones anómalas, errores de carga o listados poco representativos.
+
+### Configuración operativa
+
+La ejecución se controla por CLI, con parámetros para:
+
+- tamaño de lote
+- fila inicial
+- delay entre filas
+- timeout
+- proxy
+- paginación
+- cantidad máxima de precios
+- modo verbose
+- movimiento automático a `Done/`
+
+Esto vuelve al script flexible para corridas chicas, diagnósticos puntuales o procesamiento más amplio.
+
+---
+
+## ✅ Calidad y mantenimiento
+
+El proyecto no quedó como un script aislado: se fue endureciendo para uso más confiable.
+
+### Estado actual
+
+- **Playwright + Chromium operativo**
+- **22 tests pasando con pytest**
+- utilidades auxiliares para limpieza y mantenimiento
+- README público simplificado para visualización del repositorio
+
+### Testing
+
+Se incorporaron pruebas automatizadas para validar partes críticas del comportamiento del programa, lo que mejora mantenibilidad y reduce el riesgo de romper lógica al iterar.
 
 ---
 
 ## 📈 Impacto
 
-Este script convierte un proceso manual y dependiente en un flujo **repetible y escalable**:
+Este proyecto convierte una tarea manual de consulta y comparación de precios en un proceso mucho más consistente.
 
-- Reduce fricción operativa para tomar decisiones de precio.
-- Provee señales de mercado (**rango + oferta**) con consistencia.
-- Acelera iteraciones de pricing sin pedir datos a terceros.
-- Deja lista la base para una **lista de precios dinámica**.
+### Valor operativo
+
+- reduce tiempo de búsqueda y revisión manual
+- mejora la repetibilidad del criterio de pricing
+- entrega una base objetiva de mercado por referencia
+- permite trabajar sobre lotes más grandes sin multiplicar esfuerzo manual
+
+### Valor técnico
+
+- automatización web robusta
+- procesamiento batch configurable
+- lógica de filtrado para mejorar calidad del dato
+- tests automatizados para sostener evolución del proyecto
 
 ---
 
-## 🗺️ Roadmap (integración futura)
+## 🧭 Dónde encaja dentro del sistema
 
-Pensado como un módulo dentro de un pipeline mayor:
+Este módulo está pensado como una pieza dentro de un flujo mayor de catalogación y pricing:
 
-1. **Validación_OEM** → asegurar calidad de referencia y publicación correcta.  
-2. **MVP ERP + OCR** → cargar/validar OEM desde imágenes y actualizar fichas en ERP.  
-3. **Pricing dinámico** → `precio = f(rango mercado, stock, rotación, demanda, margen)`  
-4. **Automatización de publicación** → actualización masiva con trazabilidad.
+1. validación de OEM  
+2. captura o enriquecimiento de referencias  
+3. cálculo de rango de mercado  
+4. aplicación de reglas internas de precio  
+5. publicación o actualización masiva
+
+En ese sentido, no resuelve solo “scraping de precios”: aporta una base concreta para un sistema de pricing más automatizado.
 
 ---
 
@@ -108,8 +174,4 @@ Pensado como un módulo dentro de un pipeline mayor:
 
 ## 🧰 Stack
 
-- **Python**, **Pandas**
-- **Playwright (sync)** para navegación automatizada
-- **Regex / parsing** para normalización de precios
-- **JSON cache** para performance y repetibilidad
-
+🐍 **Python** · 📊 **Pandas** · 🎭 **Playwright** · 🧪 **Pytest** · 🧹 **Black / Flake8** · 🧾 **CLI**
