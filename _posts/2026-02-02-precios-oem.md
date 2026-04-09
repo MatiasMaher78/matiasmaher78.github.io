@@ -1,40 +1,40 @@
 ---
 layout: post
-title: "💶 Precios OEM: Automatización de pricing para autopartes usadas"
+title: "💶 Precios OEM — Automatización de pricing para autopartes usadas"
 date: 2026-01-23 12:00:00 -0300
-categories: [automation, python, scraping]
+categories: [automation, scripts]
 project_type: automation
 tags: [Python, Pandas, Playwright, Web Scraping, Pricing, Automation, Testing]
 image: "/assets/img/thumb.png"
 ---
 
-🚀 Automatización de pricing para autopartes usadas: procesa archivos de stock, consulta mercado y devuelve un output consolidado con **rango de precios sin IVA** y una señal de **oferta** por referencia OEM.
+🚀 Automatización de pricing para autopartes usadas: procesa archivos de stock y devuelve un output consolidado con **rango de precios sin IVA** y una señal de **oferta** por referencia OEM.
 
 <!--more-->
 
-## 🧠 Contexto / problema
+## 🎯 Contexto / problema
 
-En un desguace, poner precio no es solo completar un campo: implica tomar decisiones rápidas sobre piezas con distinta rotación, competencia cambiante y publicaciones con calidad dispar.
+En un desguace, poner precio no es solo completar un campo: implica tomar decisiones rápidas en un mercado donde la oferta cambia, las publicaciones no siempre son homogéneas y revisar pieza por pieza no escala.
 
-Cuando este trabajo se hace de forma manual, aparecen varios problemas:
+Cuando este trabajo se hace manualmente, aparecen varios problemas:
 
-- tiempo operativo alto para revisar pieza por pieza
-- criterios poco consistentes entre búsquedas
+- tiempo operativo alto
+- criterios inconsistentes entre búsquedas
 - dependencia de consultas repetitivas
 - dificultad para escalar el proceso sobre lotes grandes
 
-Este proyecto nace para resolver esa fricción: transformar una búsqueda manual de mercado en un flujo **repetible, auditable y usable como base de pricing**.
+Este proyecto nace para transformar esa tarea en un flujo **repetible, auditable y utilizable como base de pricing**.
 
 ---
 
-## ⚙️ Qué hace el programa
+## ✅ Qué hace el programa
 
-A partir de un archivo de entrada en **CSV, XLSX o XLS**, el script procesa la columna OEM y genera una salida consolidada con información útil para pricing.
+A partir de un archivo de entrada en **CSV, XLSX o XLS**, el script procesa la columna **OEM** y genera una salida consolidada con información útil para pricing.
 
 Para cada referencia:
 
-- realiza la búsqueda automatizada en la web
-- detecta resultados válidos
+- realiza la búsqueda automatizada
+- detecta resultados
 - extrae precios publicados sin IVA
 - calcula un rango de mercado
 - devuelve una señal de oferta según la cantidad de coincidencias encontradas
@@ -58,34 +58,31 @@ Esto permite usar el output como insumo para decisiones posteriores, por ejemplo
 
 ---
 
-## 🛠️ Diseño técnico
+## 🧩 Diseño técnico
 
-### Navegación automatizada con Playwright
+### 🌐 Navegación automatizada con Playwright
 
-La herramienta utiliza **Playwright con Chromium** para ejecutar búsquedas de forma consistente y reproducible, con soporte para modo headless y headful según necesidad de operación o debugging.
+La herramienta utiliza **Playwright con Chromium** para ejecutar búsquedas de forma consistente y reproducible, con soporte para modo **headless** y **headful** según necesidad de operación o debugging.
 
-### Procesamiento orientado a lotes
+### 📦 Procesamiento orientado a lotes
 
-El script fue pensado para trabajar sobre archivos reales de operación, con estructura simple de carpetas:
+El script fue pensado para trabajar sobre archivos reales de operación, con una estructura simple de carpetas:
 
 - `Input/`
 - `Output/`
 - `Done/`
 
-Además prioriza **CSV** cuando hay más de un formato disponible, para facilitar su uso en entornos más restringidos o flujos batch.
+Además, prioriza **CSV** cuando hay más de un formato disponible, facilitando su uso en flujos batch y entornos más restringidos.
 
-### Robustez en el cálculo de precios
+### 🛡️ Robustez en el cálculo de precios
 
-Uno de los puntos más importantes del proyecto fue mejorar la calidad del rango devuelto, evitando que el resultado final quede contaminado por publicaciones irrelevantes o valores extremos.
+Uno de los cambios más importantes del proyecto fue mejorar la calidad del rango devuelto, evitando que el resultado final quede contaminado por publicaciones irrelevantes o valores extremos.
 
 #### 1) Filtro por relevancia de título
 
-Como la búsqueda del sitio es de texto libre, una OEM o query puede devolver piezas de otra categoría. Para reducir ese ruido, cada resultado se contrasta contra la búsqueda original y solo se conservan los títulos suficientemente alineados.
+Como la búsqueda del sitio es de texto libre, una query puede devolver piezas de otra categoría. Para reducir ese ruido, cada resultado se contrasta contra la búsqueda original y solo se conservan los títulos suficientemente alineados.
 
-En la práctica, esto ayuda a evitar casos como:
-
-- buscar un turbo y recibir un motor completo
-- buscar una referencia específica y capturar piezas que solo comparten una palabra genérica
+Esto ayuda a evitar casos donde una búsqueda válida trae publicaciones relacionadas solo por una palabra genérica, pero no por la pieza correcta.
 
 #### 2) Filtro estadístico de outliers
 
@@ -93,7 +90,7 @@ Sobre los precios recolectados se aplica un segundo filtro usando percentiles **
 
 Esto mejora la señal de pricing y reduce el impacto de publicaciones anómalas, errores de carga o listados poco representativos.
 
-### Configuración operativa
+### ⚙️ Configuración operativa
 
 La ejecución se controla por CLI, con parámetros para:
 
@@ -111,20 +108,20 @@ Esto vuelve al script flexible para corridas chicas, diagnósticos puntuales o p
 
 ---
 
-## ✅ Calidad y mantenimiento
+## 🧪 Testing y calidad
 
-El proyecto no quedó como un script aislado: se fue endureciendo para uso más confiable.
+El proyecto no quedó como un script aislado: se fue endureciendo para un uso más confiable y mantenible.
 
 ### Estado actual
 
 - **Playwright + Chromium operativo**
 - **22 tests pasando con pytest**
 - utilidades auxiliares para limpieza y mantenimiento
-- README público simplificado para visualización del repositorio
+- README público simplificado para visualización general del repositorio
 
-### Testing
+### Calidad técnica
 
-Se incorporaron pruebas automatizadas para validar partes críticas del comportamiento del programa, lo que mejora mantenibilidad y reduce el riesgo de romper lógica al iterar.
+Se incorporaron pruebas automatizadas para validar partes críticas del comportamiento del programa, mejorando mantenibilidad y reduciendo el riesgo de romper lógica al iterar.
 
 ---
 
@@ -148,7 +145,7 @@ Este proyecto convierte una tarea manual de consulta y comparación de precios e
 
 ---
 
-## 🧭 Dónde encaja dentro del sistema
+## 🗺️ Dónde encaja dentro del sistema
 
 Este módulo está pensado como una pieza dentro de un flujo mayor de catalogación y pricing:
 
@@ -156,7 +153,7 @@ Este módulo está pensado como una pieza dentro de un flujo mayor de catalogaci
 2. captura o enriquecimiento de referencias  
 3. cálculo de rango de mercado  
 4. aplicación de reglas internas de precio  
-5. publicación o actualización masiva
+5. publicación o actualización masiva  
 
 En ese sentido, no resuelve solo “scraping de precios”: aporta una base concreta para un sistema de pricing más automatizado.
 
@@ -174,4 +171,9 @@ En ese sentido, no resuelve solo “scraping de precios”: aporta una base conc
 
 ## 🧰 Stack
 
-🐍 **Python** · 📊 **Pandas** · 🎭 **Playwright** · 🧪 **Pytest** · 🧹 **Black / Flake8** · 🧾 **CLI**
+- **Python**
+- **Pandas**
+- **Playwright**
+- **Pytest**
+- **Black / Flake8**
+- **CLI**
