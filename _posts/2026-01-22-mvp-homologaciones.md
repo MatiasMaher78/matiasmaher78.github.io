@@ -1,126 +1,130 @@
 ---
 layout: post
-title: "🚗 MVP Homologación de Vehículos"
-date: 2026-01-22 12:00:00 -0300
+title: "🚗 Vehicle Data Print — MVP para homologación vehicular"
+date: "YYYY-MM-DD 12:00:00 -0300"
 categories: [mvp, product]
 project_type: mvp
-tags: [MVP, Product, FastAPI, React, Web Scraping, Data Normalization, Automation]
+tags: [MVP, Product, FastAPI, React, Supabase, Automation, Compliance]
 image: "/assets/img/thumb.png"
 ---
 
-🚀 MVP para **automatizar la recolección, normalización y consolidación de especificaciones técnicas de vehículos** desde múltiples fuentes web, orientado a equipos de homologación y validación técnica.
+🚀 MVP para homologación vehicular que transforma un proceso manual, lento y propenso a errores en un flujo mucho más ágil: extrae datos técnicos desde fuentes especializadas, los consolida y genera un documento profesional listo para presentar.
 
 <!--more-->
 
 ## 🧠 Contexto / problema
 
-En procesos de homologación, los datos técnicos de un vehículo suelen estar **dispersos en varios portales**, con **formatos, nomenclaturas y niveles de detalle distintos**.
+Homologar un vehículo implica recopilar información técnica de distintas fuentes, contrastarla, resolver discrepancias y preparar un documento final en el idioma correcto.
 
-El trabajo manual de comparar fuentes:
-- consume mucho tiempo,
-- es propenso a errores,
-- y dificulta la **trazabilidad por expediente**.
+Cuando ese trabajo se hace manualmente, el costo operativo crece rápido:
 
-A medida que aumenta la presión por **acortar ciclos de validación** y reducir retrabajos documentales, este enfoque deja de escalar.
+- hay que revisar varias fuentes por cada vehículo
+- aparecen diferencias entre datos que deben resolverse a mano
+- se repite mucho trabajo administrativo
+- el tiempo de entrega depende demasiado de tareas manuales
+- aumenta el riesgo de errores en campos sensibles del documento final
 
----
-
-## 🛠️ Qué hace el MVP
-
-El sistema permite:
-
-- Ingresar hasta **3 URLs de referencia** por vehículo.
-- Ejecutar **scraping concurrente** de cada fuente.
-- **Unificar campos técnicos clave** en una vista única editable.
-- Exportar el resultado final en una **plantilla documental** lista para uso operativo.
-
-El output actúa como una **ficha técnica homologada**, con origen controlado y consistencia entre fuentes.
+En la práctica, no era solo “buscar datos”: era sostener un proceso técnico repetitivo que consumía horas y no escalaba bien.
 
 ---
 
-## ⚙️ Cómo lo hace
+## 💡 Solución
 
-**Backend (FastAPI)**
-- Scraping concurrente por fuente.
-- Transformación de cada origen a un **esquema común**.
-- Reglas simples de **priorización por campo**.
-- Endpoints autenticados para procesamiento y exportación.
+**Vehicle Data Print** centraliza ese flujo en una sola aplicación.
 
-**Frontend (React)**
-- Autenticación de usuarios.
-- Vista comparativa: datos extraídos / consolidados.
-- Edición manual del valor final por campo.
-- Historial de exportaciones por usuario.
+El usuario carga hasta **3 URLs** de fuentes especializadas y la plataforma:
 
----
+1. **extrae automáticamente** los datos técnicos del vehículo
+2. **fusiona y reconcilia** la información usando reglas predefinidas
+3. **presenta el resultado** en una interfaz editable y ordenada por secciones
+4. **genera un documento DOCX** en el idioma elegido, listo para entregar
 
-## ⭐ Diferenciales frente al proceso manual
+El objetivo del producto no es solo ahorrar tiempo, sino también **estandarizar** cómo se construye la documentación técnica y reducir dependencia de tareas manuales de bajo valor.
 
-- 🔗 **Un solo flujo**: extracción + normalización + priorización + exportación.
-- 🧾 **Trazabilidad**: historial de descargas y ediciones por usuario.
-- ⏱️ **Reducción drástica de tiempos** frente a comparación manual.
-- 📦 **Base escalable** para futuras integraciones y reglas avanzadas.
+### Capacidades principales
 
----
-
-## 🧱 Alcance del MVP
-
-**Incluye**
-- Scraping multi-fuente en paralelo.
-- Consolidación por campo técnico.
-- Edición del valor final.
-- Exportación documental.
-- Autenticación y seguimiento básico.
-
-**No incluye**
-- Integraciones directas con ERP / PLM / CRM.
-- Motor avanzado de reglas por país o normativa específica.
+- procesamiento simultáneo de **3 fuentes especializadas**
+- gestión de **121 campos técnicos** por vehículo
+- exportación en **10 idiomas**
+- soporte para vehículos **híbridos y eléctricos**
+- historial de documentos generados por usuario
+- acceso autenticado, con visibilidad restringida a la actividad propia
 
 ---
 
-## 📈 Métricas de éxito
+## ⚙️ Arquitectura
 
-- **KPI principal:** tiempo promedio desde URLs → ficha homologada exportada.
-- **Secundaria:** reducción de discrepancias entre fuentes y retrabajo manual por expediente.
+La aplicación sigue una arquitectura web clásica, separando interfaz, lógica de negocio y persistencia.
+
+### Componentes principales
+
+- **Frontend en React + TypeScript**  
+  interfaz para cargar URLs, revisar datos, editar campos y disparar la exportación
+
+- **Backend en FastAPI**  
+  orquesta scraping, transformación, reconciliación y generación del documento
+
+- **Capa de datos con Supabase / PostgreSQL**  
+  autenticación de usuarios, persistencia del historial y almacenamiento de plantillas
+
+### Flujo general
+
+**Input → extracción → reconciliación → revisión → exportación**
+
+1. El usuario autenticado ingresa hasta 3 URLs
+2. El backend consulta las fuentes y extrae sus datos
+3. Cada fuente se transforma a un esquema interno común
+4. El sistema fusiona resultados con reglas de prioridad
+5. El usuario revisa y corrige si hace falta
+6. Se genera el DOCX final y se registra la descarga
 
 ---
 
-## 🗺️ Roadmap
+## ⭐ Diferenciales
 
-**Siguiente iteración**
-- Validaciones automáticas de calidad de dato.
-- Observabilidad del pipeline de scraping.
-
-**Iteración 2**
-- Reglas configurables por mercado / modelo.
-- Plantillas de salida adicionales.
-
-**Iteración 3**
-- Integración vía API con sistemas internos.
-- Panel analítico de productividad y errores.
+- **Reduce fricción operativa:** convierte un proceso de varias horas en un flujo mucho más corto y controlado
+- **Mejora consistencia:** aplica criterios fijos para resolver conflictos entre fuentes
+- **Permite revisión humana:** no obliga a confiar ciegamente en la automatización; deja el dato editable antes de exportar
+- **Escala mejor:** evita repetir el mismo trabajo manual vehículo por vehículo
+- **Tiene orientación de producto:** autenticación, historial, estados y exportación profesional, no solo un script aislado
 
 ---
 
-## 🧪 Estado actual
+## 📈 Impacto
 
-MVP funcional con:
-- autenticación,
-- procesamiento multi-fuente,
-- edición manual,
-- exportación de fichas técnicas.
+Este MVP apunta a resolver un problema operativo concreto: **documentar vehículos de forma más rápida, consistente y trazable**.
+
+### Valor para perfiles no técnicos / RRHH
+
+- reduce trabajo manual repetitivo
+- acelera la preparación de documentación técnica
+- baja la probabilidad de errores por copia y pega
+- ordena un flujo que antes dependía demasiado de revisión artesanal
+- muestra capacidad de llevar una necesidad operativa a una solución usable
+
+### Resumen breve para gente técnica
+
+Aplicación full-stack con **React + TypeScript** en frontend y **FastAPI** en backend, diseñada para procesar hasta 3 fuentes por vehículo, mapearlas a un esquema común de **121 campos**, reconciliar conflictos con reglas de prioridad y exportar un **DOCX** multilenguaje. Usa **Supabase** para autenticación, persistencia del historial y almacenamiento de plantillas, y contempla casos específicos como híbridos, eléctricos y diferencias de formato entre fuentes.
+
+---
+
+## 🖼️ Capturas
+
+![Pantalla principal](/assets/img/projects/vehicle-data-print/01-home.png)
+
+![Revisión de datos](/assets/img/projects/vehicle-data-print/02-review.png)
+
+![Exportación de documento](/assets/img/projects/vehicle-data-print/03-export.png)
+
+---
+
+## 🎥 Demo
+
+Pendiente de sumar video breve del flujo completo:
+**input → extracción → revisión → exportación**
 
 ---
 
 ## 🧰 Stack
 
-- **Frontend:** React, TypeScript, Vite, TailwindCSS, Axios  
-- **Backend:** FastAPI, Uvicorn, pandas, BeautifulSoup / requests  
-- **Plataforma:** Supabase (Auth + DB), docxtpl / python-docx
-
----
-
-## 🔒 Notas de confidencialidad
-
-- Datos anonimizados.
-- Valores y endpoints omitidos.
-- Sin exposición de credenciales o información sensible.
+React · TypeScript · FastAPI · Python · Supabase · PostgreSQL · BeautifulSoup · Pandas · docxtpl
