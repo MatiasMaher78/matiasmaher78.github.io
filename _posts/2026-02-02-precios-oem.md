@@ -8,22 +8,22 @@ tags: [Python, Pandas, Playwright, Web Scraping, Pricing, Automation, Testing]
 image: "/assets/img/thumb.png"
 ---
 
-🚀 Automatización de pricing para autopartes usadas: procesa archivos de stock y devuelve un output consolidado con **rango de precios sin IVA** y una señal de **oferta** por referencia OEM.
+🚀 Automatización de pricing para autopartes usadas: transforma búsquedas manuales de mercado en un flujo más rápido, consistente y escalable, devolviendo por cada referencia OEM un **rango de precios sin IVA** y una señal de **oferta** útil para tomar decisiones comerciales.
 
 <!--more-->
 
 ## 🎯 Contexto / problema
 
-En un desguace, poner precio no es solo completar un campo: implica tomar decisiones rápidas en un mercado donde la oferta cambia, las publicaciones no siempre son homogéneas y revisar pieza por pieza no escala.
+En un desguace, poner precio no es solo completar un campo: implica revisar mercado, comparar publicaciones y decidir con rapidez sobre piezas que no siempre tienen una referencia clara ni una oferta homogénea.
 
 Cuando este trabajo se hace manualmente, aparecen varios problemas:
 
-- tiempo operativo alto
-- criterios inconsistentes entre búsquedas
-- dependencia de consultas repetitivas
-- dificultad para escalar el proceso sobre lotes grandes
+- mucho tiempo operativo en búsquedas repetitivas
+- criterios inconsistentes entre consultas
+- dificultad para sostener el mismo nivel de revisión a escala
+- dependencia de tareas poco estandarizadas para una decisión sensible del negocio
 
-Este proyecto nace para transformar esa tarea en un flujo **repetible, auditable y utilizable como base de pricing**.
+Este proyecto resuelve esa fricción convirtiendo una tarea dispersa y repetitiva en un proceso **repetible, auditable y reutilizable como base de pricing**.
 
 ---
 
@@ -76,19 +76,19 @@ Además, prioriza **CSV** cuando hay más de un formato disponible, facilitando 
 
 ### 🛡️ Robustez en el cálculo de precios
 
-Uno de los cambios más importantes del proyecto fue mejorar la calidad del rango devuelto, evitando que el resultado final quede contaminado por publicaciones irrelevantes o valores extremos.
+Una de las mejoras más importantes del proyecto fue endurecer la calidad del rango devuelto, para evitar que el resultado final quede contaminado por publicaciones irrelevantes o valores extremos.
 
 #### 1) Filtro por relevancia de título
 
-Como la búsqueda del sitio es de texto libre, una query puede devolver piezas de otra categoría. Para reducir ese ruido, cada resultado se contrasta contra la búsqueda original y solo se conservan los títulos suficientemente alineados.
+Como la búsqueda del sitio es de texto libre, una query puede devolver piezas de otra categoría aunque compartan alguna palabra con la referencia buscada. Para reducir ese ruido, cada resultado se contrasta contra la query original y solo se conservan los títulos suficientemente alineados.
 
-Esto ayuda a evitar casos donde una búsqueda válida trae publicaciones relacionadas solo por una palabra genérica, pero no por la pieza correcta.
+Esto mejora la precisión del cálculo y evita que el rango final se apoye en publicaciones que no representan la pieza correcta.
 
 #### 2) Filtro estadístico de outliers
 
 Sobre los precios recolectados se aplica un segundo filtro usando percentiles **P5/P95**, descartando valores extremos antes de informar el rango final.
 
-Esto mejora la señal de pricing y reduce el impacto de publicaciones anómalas, errores de carga o listados poco representativos.
+Con esto, el output gana estabilidad frente a publicaciones anómalas, errores de carga o resultados poco representativos.
 
 ### ⚙️ Configuración operativa
 
@@ -132,7 +132,7 @@ Este proyecto convierte una tarea manual de consulta y comparación de precios e
 ### Valor operativo
 
 - reduce tiempo de búsqueda y revisión manual
-- mejora la repetibilidad del criterio de pricing
+- mejora la consistencia del criterio de pricing
 - entrega una base objetiva de mercado por referencia
 - permite trabajar sobre lotes más grandes sin multiplicar esfuerzo manual
 
