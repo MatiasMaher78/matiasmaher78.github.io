@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "🚗 Vehicle Data Print — MVP para homologación vehicular"
-date: "YYYY-MM-DD 12:00:00 -0300"
+date: "20255-06-05 12:00:00 -0300"
 categories: [mvp, product]
 project_type: mvp
 tags: [MVP, Product, FastAPI, React, Supabase, Automation, Compliance]
