@@ -1,179 +1,223 @@
 ---
 layout: post
-title: "💶 Precios OEM — Automatización de pricing para autopartes usadas"
+title: "⚙️ Automotive OEM Pricing ETL: From Outsourced Task to Internal Service"
 date: 2026-01-23 12:00:00 -0300
 categories: [automation, scripts]
 project_type: automation
-tags: [Python, Pandas, Playwright, Web Scraping, Pricing, Automation, Testing]
 image: "/assets/img/thumb.png"
+description: "Internal OEM pricing ETL pipeline for used automotive parts. Processes 250–300 products weekly with Python, pandas, HTTP web scraping, caching, retries, checkpoints and statistical outlier filtering."
+tags: [Python, Pandas, Web Scraping, ETL, Automotive, OEM Pricing, Pricing Automation, Data Engineering, Data Quality, Pytest, Data Pipeline, Batch Processing, Automation]
 ---
 
-🚀 Automatización de pricing para autopartes usadas: transforma búsquedas manuales de mercado en un flujo más rápido, consistente y escalable, devolviendo por cada referencia OEM un **rango de precios sin IVA** y una señal de **oferta** útil para tomar decisiones comerciales.
+Built an internal **OEM pricing ETL pipeline** for used automotive parts, replacing a contractor-dependent weekly workflow with a repeatable and auditable in-house service. The pipeline processes **250–300 products per week** in approximately **five hours**, producing structured market pricing data for commercial review and bulk publication.
 
 <!--more-->
 
-## 🎯 Contexto / problema
+## The operational problem
 
-En un desguace, poner precio no es solo completar un campo: implica revisar mercado, comparar publicaciones y decidir con rapidez sobre piezas que no siempre tienen una referencia clara ni una oferta homogénea.
+The company previously outsourced its weekly OEM pricing research to external developers.
 
-Cuando este trabajo se hace manualmente, aparecen varios problemas:
+This created several operational constraints:
 
-- mucho tiempo operativo en búsquedas repetitivas
-- criterios inconsistentes entre consultas
-- dificultad para sostener el mismo nivel de revisión a escala
-- dependencia de tareas poco estandarizadas para una decisión sensible del negocio
+- recurring third-party execution fees;
+- dependency on contractor availability;
+- variable delivery times;
+- increased risk during high-demand periods;
+- limited internal control over maintenance and execution;
+- delays of one to two days when the assigned developer was unavailable.
 
-Este proyecto resuelve esa fricción convirtiendo una tarea dispersa y repetitiva en un proceso **repetible, auditable y reutilizable como base de pricing**.
+The process was business-critical because pricing teams needed consistent market references for hundreds of used automotive parts every week.
+
+After the internal pipeline was validated, the company no longer needed to outsource this workflow.
 
 ---
 
-## ✅ Qué hace el programa
+## What the pipeline does
 
-A partir de un archivo de entrada en **CSV, XLSX o XLS**, el script procesa la columna **OEM** y genera una salida consolidada con información útil para pricing.
+The program reads automotive part batches from **CSV, XLSX or XLS files**, processes each OEM reference and generates a structured pricing output.
 
-Para cada referencia:
+For every product, it:
 
-- realiza la búsqueda automatizada
-- detecta resultados
-- extrae precios publicados sin IVA
-- calcula un rango de mercado
-- devuelve una señal de oferta según la cantidad de coincidencias encontradas
+1. normalizes the OEM search query;
+2. retrieves market listings through HTTP web scraping;
+3. parses the returned HTML;
+4. filters results by title relevance;
+5. extracts published prices excluding VAT;
+6. removes statistical outliers;
+7. calculates the observed minimum and maximum market prices;
+8. records the number of valid matching listings;
+9. exports a consolidated XLSX or CSV file.
 
-### Output principal
+### Output structure
 
-El resultado final queda listo para análisis o reglas internas de precio, con campos del tipo:
+The final dataset contains fields such as:
 
+- `ID`
 - `OEM`
 - `Units`
 - `Min Price`
 - `Max Price`
 
-Esto permite usar el output como insumo para decisiones posteriores, por ejemplo:
-
-- margen objetivo
-- prioridad comercial
-- stock disponible
-- rotación esperada
-- reglas de pricing dinámico
+This output becomes the pricing reference used in the downstream commercial workflow.
 
 ---
 
-## 🧩 Diseño técnico
+## End-to-end business workflow
 
-### 🌐 Navegación automatizada con Playwright
+```text
+OEM product batch
+→ automated market extraction
+→ relevance and outlier filtering
+→ structured XLSX/CSV output
+→ manual pricing of unmatched products
+→ Sales Director review
+→ bulk publication by management
+```
 
-La herramienta utiliza **Playwright con Chromium** para ejecutar búsquedas de forma consistente y reproducible, con soporte para modo **headless** y **headful** según necesidad de operación o debugging.
+Products without reliable matches are not assigned an automatic price. They are separated for manual calculation and review.
 
-### 📦 Procesamiento orientado a lotes
-
-El script fue pensado para trabajar sobre archivos reales de operación, con una estructura simple de carpetas:
-
-- `Input/`
-- `Output/`
-- `Done/`
-
-Además, prioriza **CSV** cuando hay más de un formato disponible, facilitando su uso en flujos batch y entornos más restringidos.
-
-### 🛡️ Robustez en el cálculo de precios
-
-Una de las mejoras más importantes del proyecto fue endurecer la calidad del rango devuelto, para evitar que el resultado final quede contaminado por publicaciones irrelevantes o valores extremos.
-
-#### 1) Filtro por relevancia de título
-
-Como la búsqueda del sitio es de texto libre, una query puede devolver piezas de otra categoría aunque compartan alguna palabra con la referencia buscada. Para reducir ese ruido, cada resultado se contrasta contra la query original y solo se conservan los títulos suficientemente alineados.
-
-Esto mejora la precisión del cálculo y evita que el rango final se apoye en publicaciones que no representan la pieza correcta.
-
-#### 2) Filtro estadístico de outliers
-
-Sobre los precios recolectados se aplica un segundo filtro usando percentiles **P5/P95**, descartando valores extremos antes de informar el rango final.
-
-Con esto, el output gana estabilidad frente a publicaciones anómalas, errores de carga o resultados poco representativos.
-
-### ⚙️ Configuración operativa
-
-La ejecución se controla por CLI, con parámetros para:
-
-- tamaño de lote
-- fila inicial
-- delay entre filas
-- timeout
-- proxy
-- paginación
-- cantidad máxima de precios
-- modo verbose
-- movimiento automático a `Done/`
-
-Esto vuelve al script flexible para corridas chicas, diagnósticos puntuales o procesamiento más amplio.
+This human validation step keeps commercial decisions under business control while automating the repetitive data collection and consolidation work.
 
 ---
 
-## 🧪 Testing y calidad
+## Architecture and key decisions
 
-El proyecto no quedó como un script aislado: se fue endureciendo para un uso más confiable y mantenible.
+The project evolved from browser-based automation into a lighter **HTTP extraction pipeline**.
 
-### Estado actual
+The current implementation uses a batch-oriented architecture built around:
 
-- **Playwright + Chromium operativo**
-- **22 tests pasando con pytest**
-- utilidades auxiliares para limpieza y mantenimiento
-- README público simplificado para visualización general del repositorio
+* a configurable HTTP client;
+* HTML parsing;
+* OEM query normalization;
+* pagination;
+* relevance filtering;
+* statistical price filtering;
+* persistent caching;
+* retry and backoff strategies;
+* incremental checkpoints;
+* anomaly logging;
+* structured file export.
 
-### Calidad técnica
+### Direct HTTP extraction
 
-Se incorporaron pruebas automatizadas para validar partes críticas del comportamiento del programa, mejorando mantenibilidad y reduciendo el riesgo de romper lógica al iterar.
+Moving away from browser automation reduced runtime overhead and made large batch execution more efficient.
 
----
+### Persistent cache
 
-## 📈 Impacto
+Previously processed OEM references are stored locally with a defined expiration period.
 
-Este proyecto convierte una tarea manual de consulta y comparación de precios en un proceso mucho más consistente.
+This avoids unnecessary repeated requests, reduces processing time and lowers the risk of triggering external rate limits.
 
-### Valor operativo
+### Retry and backoff strategy
 
-- reduce tiempo de búsqueda y revisión manual
-- mejora la consistencia del criterio de pricing
-- entrega una base objetiva de mercado por referencia
-- permite trabajar sobre lotes más grandes sin multiplicar esfuerzo manual
+Temporary failures are handled through controlled retries and progressively longer waiting periods instead of immediately aborting the batch.
 
-### Valor técnico
+### Smoke test before execution
 
-- automatización web robusta
-- procesamiento batch configurable
-- lógica de filtrado para mejorar calidad del dato
-- tests automatizados para sostener evolución del proyecto
+The pipeline validates external availability before starting a full production batch.
 
----
+This prevents hundreds of rows from being processed under invalid connectivity or response conditions.
 
-## 🗺️ Dónde encaja dentro del sistema
+### Incremental checkpoints
 
-Este módulo está pensado como una pieza dentro de un flujo mayor de catalogación y pricing:
+Intermediate results are saved during execution so that long-running jobs can recover from partial failures without restarting from the beginning.
 
-1. validación de OEM  
-2. captura o enriquecimiento de referencias  
-3. cálculo de rango de mercado  
-4. aplicación de reglas internas de precio  
-5. publicación o actualización masiva  
+### Data quality filters
 
-En ese sentido, no resuelve solo “scraping de precios”: aporta una base concreta para un sistema de pricing más automatizado.
+Two complementary filters improve the reliability of the final pricing range:
 
----
+1. **Title relevance filtering** removes listings that do not sufficiently match the original OEM query.
+2. **P5/P95 statistical filtering** removes extreme prices before calculating the final range.
 
-## 🖼️ Capturas del resultado final
-
-### 1) Input
-![Input](/assets/img/projects/precios-oem/input-precios-oem.png)
-
-### 2) Output
-![Output](/assets/img/projects/precios-oem/output-precios-oem.png)
+These decisions make the result more stable when external listings contain unrelated products, incorrect values or unusual market entries.
 
 ---
 
-## 🧰 Stack
+## Business impact
 
-- **Python**
-- **Pandas**
-- **Playwright**
-- **Pytest**
-- **Black / Flake8**
-- **CLI**
+* **250–300 products processed each week**
+* approximately **five hours of automated execution**
+* weekly delivery no longer depends on external developer availability
+* recurring third-party execution fees were eliminated
+* operational delays were reduced to a maximum of approximately one or two days
+* unmatched products remain under manual commercial review
+* the Sales Director validates the final pricing data
+* management performs the subsequent bulk publication
+
+The main outcome was not only faster extraction. The company converted an outsourced dependency into an internal operational capability.
+
+---
+
+## Reliability and maintainability
+
+The pipeline includes safeguards designed for recurring production use:
+
+* configurable batch execution;
+* persistent OEM cache;
+* retries with backoff;
+* external availability smoke test;
+* incremental checkpoints;
+* anomaly and detection logs;
+* CSV fallback if XLSX export fails;
+* automated tests covering critical behavior;
+* CLI parameters for diagnostics and controlled runs.
+
+This makes the project a maintainable data pipeline rather than a one-off scraping script.
+
+---
+
+## My role
+
+I designed, implemented and maintain the complete workflow, including:
+
+* requirements analysis with the automotive business;
+* Python ETL development;
+* HTTP web scraping;
+* HTML parsing;
+* data cleaning and normalization;
+* statistical outlier filtering;
+* batch processing;
+* caching and retry strategies;
+* automated testing;
+* operational documentation;
+* handoff of structured results to the commercial team.
+
+The project combines **data engineering**, **automotive domain knowledge** and **business process automation**.
+
+---
+
+## Results
+
+* Replaced a contractor-dependent weekly process with an internal service.
+* Processes 250–300 used automotive products per week.
+* Produces structured and auditable OEM market pricing data.
+* Eliminated recurring external execution fees.
+* Reduced dependency on third-party availability.
+* Maintains human review for unmatched and commercially sensitive cases.
+* Supports the downstream bulk publication workflow.
+
+---
+
+## Status
+
+`In production`
+
+The pipeline is used as a recurring weekly internal service.
+
+---
+
+## Screenshots
+
+### Input batch
+
+![OEM pricing input batch](/assets/img/projects/precios-oem/input-precios-oem.png)
+
+### Structured output
+
+![OEM pricing structured output](/assets/img/projects/precios-oem/output-precios-oem.png)
+
+---
+
+## Stack
+
+**Python** · **pandas** · **curl_cffi** · **BeautifulSoup** · **HTTP Web Scraping** · **ETL** · **pytest** · **CLI** · **XLSX/CSV**
