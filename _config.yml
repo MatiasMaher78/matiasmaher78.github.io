@@ -12,7 +12,13 @@ share-links-active:
 
 # How to display the link to your website in the footer
 # Remove this if you don't want a link in the footer
-url-pretty: "MyWebsite.com"
+url-pretty: "matiasmaher78.github.io"
+
+# Social network links shown as icons (e.g. in the footer)
+social-network-links:
+  email: mahermatias@gmail.com
+  github: MatiasMaher78
+  linkedin: matias-maher
 
 # Add the website title to the title of every page
 title-on-all-pages: true
@@ -41,7 +47,7 @@ edit_page_button: true
 navbar-var-length: false
 
 # The keywords to associate with your website, for SEO purposes
-#keywords: "my,list,of,keywords"
+keywords: "Data Engineer, Automotive Data, Computer Vision, YOLO, OCR, Python, SQL, FastAPI, React, Supabase, ETL, Web Scraping, Automotive Parts, OEM Validation, Automotive Pricing, Vehicle Homologation, Power BI, Human-in-the-Loop, Workflow Automation"
 
 ######################################
 # --- Custom site CSS (portfolio) --- #

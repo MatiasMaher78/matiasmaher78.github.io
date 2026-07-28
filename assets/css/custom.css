@@ -340,3 +340,47 @@ html, body {
   }
   .post-preview .post-title{ font-size: 1.18rem; }
 }
+
+/* =========================
+   About Me / Contact (Home)
+========================= */
+
+.portfolio-about {
+  max-width: 42rem;
+  margin: 2.5rem 0;
+}
+
+.portfolio-about p {
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.portfolio-contact {
+  margin: 2.5rem 0;
+}
+
+.portfolio-contact-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.portfolio-contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-surface);
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.portfolio-contact-link:hover {
+  border-color: rgba(20, 184, 166, 0.45);
+  color: var(--accent);
+  text-decoration: none;
+}
