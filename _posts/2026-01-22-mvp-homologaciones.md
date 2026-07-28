@@ -1,130 +1,278 @@
 ---
 layout: post
-title: "🚗 Vehicle Data Print — MVP para homologación vehicular"
+title: "🚗 Vehicle Data Print — Automotive Homologation MVP"
 date: "2025-06-05 12:00:00 -0300"
 categories: [mvp, product]
 project_type: mvp
-tags: [MVP, Product, FastAPI, React, Supabase, Automation, Compliance]
 image: "/assets/img/thumb.png"
+share-description: "Functional automotive homologation MVP that reduced vehicle technical documentation time from 40–50 minutes to around 15 minutes, processing 97 structured fields and generating DOCX files in 10 languages."
+tags: [React, TypeScript, FastAPI, Python, Supabase, Automotive Homologation, Vehicle Technical Data, Document Automation, Web Scraping, Human-in-the-Loop, DOCX Generation, Multilingual Application, WLTP, NEDC, Full-Stack MVP]
 ---
 
-🚀 MVP para homologación vehicular que transforma un proceso manual, lento y propenso a errores en un flujo mucho más ágil: extrae datos técnicos desde fuentes especializadas, los consolida y genera un documento profesional listo para presentar.
+**Functional MVP · Real-user validated · Currently paused**
+
+A full-stack tool that automates vehicle technical data collection and multilingual DOCX generation for automotive homologation.
 
 <!--more-->
 
-## 🧠 Contexto / problema
+## The operational problem
 
-Homologar un vehículo implica recopilar información técnica de distintas fuentes, contrastarla, resolver discrepancias y preparar un documento final en el idioma correcto.
+Automotive homologation technicians had to manually search public technical databases, compare information across multiple sources and transcribe vehicle specifications into technical documentation.
 
-Cuando ese trabajo se hace manualmente, el costo operativo crece rápido:
+The workflow required repetitive data entry and continuous value checking, which created three main problems:
 
-- hay que revisar varias fuentes por cada vehículo
-- aparecen diferencias entre datos que deben resolverse a mano
-- se repite mucho trabajo administrativo
-- el tiempo de entrega depende demasiado de tareas manuales
-- aumenta el riesgo de errores en campos sensibles del documento final
+- processing each vehicle took approximately **40–50 minutes**;
+- repetitive transcription increased the risk of typing errors and fatigue-related mistakes;
+- producing technical documents in multiple languages required additional manual work.
 
-En la práctica, no era solo “buscar datos”: era sostener un proceso técnico repetitivo que consumía horas y no escalaba bien.
+The same three automotive technicians who performed the manual workflow later used Vehicle Data Print during its operational validation.
 
 ---
 
-## 💡 Solución
+## What I built
 
-**Vehicle Data Print** centraliza ese flujo en una sola aplicación.
+Vehicle Data Print is a functional full-stack MVP that collects, consolidates and prepares structured vehicle technical data for automotive homologation workflows.
 
-El usuario carga hasta **3 URLs** de fuentes especializadas y la plataforma:
+The application:
 
-1. **extrae automáticamente** los datos técnicos del vehículo
-2. **fusiona y reconcilia** la información usando reglas predefinidas
-3. **presenta el resultado** en una interfaz editable y ordenada por secciones
-4. **genera un documento DOCX** en el idioma elegido, listo para entregar
+1. receives up to three URLs from specialized public technical sources;
+2. validates and processes the requested sources;
+3. extracts vehicle specifications concurrently;
+4. transforms source-specific data into a canonical schema;
+5. merges the results using field-level priority rules;
+6. presents the consolidated values in an editable interface;
+7. allows the technician to review and correct every field;
+8. generates a final DOCX document in one of 10 supported languages;
+9. stores an auditable snapshot of each export.
 
-El objetivo del producto no es solo ahorrar tiempo, sino también **estandarizar** cómo se construye la documentación técnica y reducir dependencia de tareas manuales de bajo valor.
-
-### Capacidades principales
-
-- procesamiento simultáneo de **3 fuentes especializadas**
-- gestión de **121 campos técnicos** por vehículo
-- exportación en **10 idiomas**
-- soporte para vehículos **híbridos y eléctricos**
-- historial de documentos generados por usuario
-- acceso autenticado, con visibilidad restringida a la actividad propia
+The current data model contains **97 structured vehicle technical fields**.
 
 ---
 
-## ⚙️ Arquitectura
+## End-to-end workflow
 
-La aplicación sigue una arquitectura web clásica, separando interfaz, lógica de negocio y persistencia.
+```text
+Public technical sources
+→ concurrent vehicle data extraction
+→ source-specific transformation
+→ field-level merging and prioritization
+→ technician review and correction
+→ language and document selection
+→ DOCX generation
+→ export snapshot stored in Supabase
+```
 
-### Componentes principales
-
-- **Frontend en React + TypeScript**  
-  interfaz para cargar URLs, revisar datos, editar campos y disparar la exportación
-
-- **Backend en FastAPI**  
-  orquesta scraping, transformación, reconciliación y generación del documento
-
-- **Capa de datos con Supabase / PostgreSQL**  
-  autenticación de usuarios, persistencia del historial y almacenamiento de plantillas
-
-### Flujo general
-
-**Input → extracción → reconciliación → revisión → exportación**
-
-1. El usuario autenticado ingresa hasta 3 URLs
-2. El backend consulta las fuentes y extrae sus datos
-3. Cada fuente se transforma a un esquema interno común
-4. El sistema fusiona resultados con reglas de prioridad
-5. El usuario revisa y corrige si hace falta
-6. Se genera el DOCX final y se registra la descarga
+The system does not blindly publish extracted information. Every final value remains editable before document generation, preserving human control over technically sensitive data.
 
 ---
 
-## ⭐ Diferenciales
+## Real-world validation
 
-- **Reduce fricción operativa:** convierte un proceso de varias horas en un flujo mucho más corto y controlado
-- **Mejora consistencia:** aplica criterios fijos para resolver conflictos entre fuentes
-- **Permite revisión humana:** no obliga a confiar ciegamente en la automatización; deja el dato editable antes de exportar
-- **Escala mejor:** evita repetir el mismo trabajo manual vehículo por vehículo
-- **Tiene orientación de producto:** autenticación, historial, estados y exportación profesional, no solo un script aislado
+Vehicle Data Print was validated in a real operational environment:
 
----
+- **3 automotive homologation technicians** used the application;
+- the tool was used **daily**;
+- approximately **125 vehicles** were processed in one month;
+- the time per vehicle decreased from **40–50 minutes to around 15 minutes**;
+- the time measurement was checked across five different vehicles;
+- the system reduced repetitive manual data entry and transcription errors.
 
-## 📈 Impacto
+The most valuable outcomes for users were:
 
-Este MVP apunta a resolver un problema operativo concreto: **documentar vehículos de forma más rápida, consistente y trazable**.
-
-### Valor para perfiles no técnicos / RRHH
-
-- reduce trabajo manual repetitivo
-- acelera la preparación de documentación técnica
-- baja la probabilidad de errores por copia y pega
-- ordena un flujo que antes dependía demasiado de revisión artesanal
-- muestra capacidad de llevar una necesidad operativa a una solución usable
-
-### Resumen breve para gente técnica
-
-Aplicación full-stack con **React + TypeScript** en frontend y **FastAPI** en backend, diseñada para procesar hasta 3 fuentes por vehículo, mapearlas a un esquema común de **121 campos**, reconciliar conflictos con reglas de prioridad y exportar un **DOCX** multilenguaje. Usa **Supabase** para autenticación, persistencia del historial y almacenamiento de plantillas, y contempla casos específicos como híbridos, eléctricos y diferencias de formato entre fuentes.
+- faster processing;
+- lower manual workload;
+- consistent document generation;
+- support for 10 languages.
 
 ---
 
-## 🖼️ Capturas
+## Architecture
 
-![Pantalla principal](/assets/img/projects/vehicle-data-print/01-home.png)
+### Frontend
 
-![Revisión de datos](/assets/img/projects/vehicle-data-print/02-review.png)
+The user interface was built with **React and TypeScript**.
 
-![Exportación de documento](/assets/img/projects/vehicle-data-print/03-export.png)
+It provides:
+
+- authenticated access;
+- URL input for technical data sources;
+- editable field-by-field review;
+- source values and consolidated values;
+- document language selection;
+- confirmation before export;
+- download history;
+- local draft persistence.
+
+### Backend
+
+The backend was built with **FastAPI and Python**.
+
+Its responsibilities include:
+
+- URL processing;
+- concurrent web scraping;
+- HTML parsing;
+- data transformation;
+- field-level merge rules;
+- document generation;
+- authentication integration;
+- export history and audit data.
+
+### Data and platform services
+
+**Supabase** provides:
+
+- authentication;
+- PostgreSQL persistence;
+- DOCX template storage;
+- export snapshots;
+- user-specific download history.
+
+### Document generation
+
+The application uses predefined DOCX templates rendered through **docxtpl and Jinja2**.
+
+One template is maintained for each supported language, allowing document layout and terminology to remain controlled and consistent.
 
 ---
 
-## 🎥 Demo
+## Key architecture decisions
 
-Pendiente de sumar video breve del flujo completo:
-**input → extracción → revisión → exportación**
+### Multi-source data consolidation
+
+Vehicle technical information can differ between public sources.
+
+Instead of trusting one global source, the system applies explicit priority rules at field level. Specific values, such as fuel type, particulate emissions and trailer mass, use dedicated merge logic.
+
+### Human-in-the-loop review
+
+All consolidated values remain editable before export.
+
+This design reduces repetitive work without removing the technician from the final technical decision.
+
+### Deterministic multilingual generation
+
+The runtime does not depend on an external translation API or LLM.
+
+The system uses controlled document templates and predefined translations for supported enumerated values. This keeps output predictable and avoids translation costs during document generation.
+
+### Auditable export snapshots
+
+Each generated document stores a snapshot of the submitted data in PostgreSQL.
+
+This provides traceability of what information was used for every export, even though the generated DOCX file itself is delivered directly to the user.
 
 ---
 
-## 🧰 Stack
+## Automotive data coverage
 
-React · TypeScript · FastAPI · Python · Supabase · PostgreSQL · BeautifulSoup · Pandas · docxtpl
+The application processes 97 structured fields across areas including:
+
+- vehicle identification;
+- dimensions and body structure;
+- masses and loads;
+- engine and propulsion;
+- transmission and chassis;
+- body configuration;
+- emissions and regulatory data;
+- consumption and efficiency.
+
+The implemented regulatory data model includes:
+
+- **WLTP**
+- **NEDC**
+- **Euro emissions formats**
+
+The system also contains dedicated handling for hybrid and electric vehicle fields.
+
+---
+
+## Multilingual document generation
+
+Vehicle Data Print generates DOCX documents in 10 languages:
+
+- English
+- German
+- Portuguese
+- Italian
+- French
+- Dutch
+- Swedish
+- Romanian
+- Polish
+- Czech
+
+The use of controlled templates improves terminology consistency and reduces the manual work required to prepare multilingual technical documentation.
+
+---
+
+## Business impact
+
+- Reduced processing time from **40–50 minutes to around 15 minutes per vehicle**.
+- Processed approximately **125 vehicles in one month**.
+- Supported **3 concurrent automotive homologation technicians**.
+- Reduced repetitive manual data entry.
+- Reduced typing errors caused by transcription and fatigue.
+- Consolidated data from multiple sources into one review interface.
+- Generated consistent technical documents in **10 languages**.
+- Converted a real manual workflow into a validated digital product.
+
+---
+
+## My role
+
+I designed and built the product end-to-end, combining automotive homologation knowledge with full-stack development.
+
+My work included:
+
+- operational workflow analysis;
+- automotive data modeling;
+- multi-source web scraping;
+- transformation and merge rules;
+- React and TypeScript frontend development;
+- FastAPI backend development;
+- Supabase integration;
+- authentication and persistence;
+- multilingual DOCX generation;
+- human-in-the-loop workflow design;
+- deployment and real-user validation.
+
+LLMs were used as development accelerators for architecture exploration, implementation support and iteration, but they are not part of the production runtime.
+
+---
+
+## Product status
+
+`Functional MVP · Real-user validated · Currently paused`
+
+The product was developed over approximately four months and validated through daily use with real users and real vehicle data.
+
+It was paused after the validation period because a commercial agreement on the subscription price was not reached. The product was not paused because of a failure in its core technical workflow.
+
+---
+
+## Product demo
+
+The demo uses anonymized real vehicle data and shows the complete workflow from source URLs to the final multilingual DOCX document.
+
+[Watch the Vehicle Data Print demo](VIDEO_URL_HERE)
+
+---
+
+## Results
+
+- 97 structured technical fields.
+- 10 supported document languages.
+- 3 real automotive homologation users.
+- Approximately 125 vehicles processed in one month.
+- Daily operational use during validation.
+- Processing time reduced to around 15 minutes per vehicle.
+- Human review retained before every export.
+- Private source-code repository.
+- Functional full-stack MVP validated with real-world automotive data.
+
+---
+
+## Stack
+
+**React** · **TypeScript** · **Vite** · **FastAPI** · **Python** · **Supabase** · **PostgreSQL** · **BeautifulSoup** · **Concurrent Web Scraping** · **docxtpl** · **Jinja2** · **DOCX Generation** · **JWT Authentication**
