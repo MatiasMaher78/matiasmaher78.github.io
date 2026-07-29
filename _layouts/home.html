@@ -7,6 +7,25 @@ layout: page
 {% assign posts = site.posts %}
 
 <!-- ========================= -->
+<!-- COMPUTER VISION / AI SYSTEMS -->
+<!-- ========================= -->
+<section class="home-section">
+  <h2 class="home-section-title">🧠 Computer Vision / AI Systems</h2>
+
+  <ul class="posts-list list-unstyled" role="list">
+    {% for post in posts %}
+      {% if post.project_type == "cv" %}
+        <li class="post-preview post-preview-cv">
+          {% include home_post_card.html post=post %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
+<hr>
+
+<!-- ========================= -->
 <!-- BI / ANALYTICS -->
 <!-- ========================= -->
 <section class="home-section">
