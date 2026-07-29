@@ -19,7 +19,7 @@ Cataloguing used autoparts starts with a photo. Someone has to look at it, figur
 
 ## The operational problem
 
-At a dismantler, part identification from photos is repetitive, error-prone, and hard to scale consistently. Getting a part wrong — or worse, mixing up a left/right symmetric part — has a real cost: broken listings, wrong pricing, wasted stock movements.
+In automotive parts operations, part identification from photos is repetitive, error-prone, and hard to scale consistently. Getting a part wrong — or worse, mixing up a left/right symmetric part — has a real cost: broken listings, wrong pricing, wasted stock movements.
 
 The goal wasn't to remove human judgment. It was to automate high-confidence cases and concentrate manual effort exactly where it's needed.
 
@@ -32,7 +32,7 @@ A photo intake and detection pipeline with a human review layer built into the c
 3. **Detection** — a YOLO model (ONNX, CPU inference) classifies parts in each image. Detections above a 0.50 confidence threshold are auto-assigned; everything else goes to a review queue instead of being guessed.
 4. **OCR validation (optional)** — for auto-assigned parts, a deterministic OCR step (OCR.space or self-hosted PaddleOCR) reads part labels. A rule-based scoring engine — regex brand matching, per-class thresholds, penalty rules for known false-positive patterns — decides READY / REVIEW / FAILED. No model does the reasoning here; it's an auditable, hand-tuned decision layer.
 5. **Human-in-the-loop review** — a Streamlit tool lets an operator resolve the review queue and correct OCR candidates. Symmetric parts (left/right) are **forced to review regardless of confidence**, a deliberate safety choice to prevent a class of error that's expensive to get wrong.
-6. **Export** — validated results are written to Excel matching the dismantler's existing ERP layout, ready for commercial review.
+6. **Export** — validated results are written to Excel matching the client's existing ERP layout, ready for commercial review.
 
 A FastAPI backend and a separate React + TypeScript frontend expose this flow to a pilot-facing app, on top of the internal Streamlit operator tool.
 
@@ -42,7 +42,7 @@ Production today runs on a single YOLO model gating what gets auto-assigned. Two
 
 ## Real numbers (offline evaluation, not production telemetry)
 
-These come from running the pipeline against real dismantler photo archives — not from a live monitoring system, since one doesn't exist yet:
+These come from running the pipeline against real automotive parts photo archives — not from a live monitoring system, since one doesn't exist yet:
 
 - **1,671 real photos** from a single vehicle, processed end-to-end at ~1.2s/image average (CPU-only inference).
 - On a smaller real sample (9 vehicles, 109 photos): **~9% of images reached a fully automated READY state**, with the rest routed to review — a meaningful share of that by deliberate design (symmetric parts always reviewed), not model failure.
@@ -51,7 +51,7 @@ The honest read: this is not "no manual data entry" yet. It's a system that remo
 
 ## What's next
 
-- Generalizing the Excel export beyond a single client's fixed column layout — the current blocker to onboarding a second dismantler (the data model already supports multi-tenant, the parsing layer doesn't yet).
+- Generalizing the Excel export beyond a single client's fixed column layout — the current blocker to onboarding a second client (the data model already supports multi-tenant, the parsing layer doesn't yet).
 - Promoting v3/v4 models from shadow to production once their offline numbers clear the current baseline.
 - Moving from local execution to an actual pilot deployment (VPS, systemd, real auth hardening beyond Basic Auth).
 
