@@ -26,15 +26,15 @@ layout: page
 <hr>
 
 <!-- ========================= -->
-<!-- BI / ANALYTICS -->
+<!-- MVP / PRODUCT -->
 <!-- ========================= -->
 <section class="home-section">
-  <h2 class="home-section-title">📊 BI / Analytics</h2>
+  <h2 class="home-section-title">🚀 MVP / Product</h2>
 
   <ul class="posts-list list-unstyled" role="list">
     {% for post in posts %}
-      {% if post.project_type == "bi" %}
-        <li class="post-preview post-preview-bi">
+      {% if post.project_type == "mvp" %}
+        <li class="post-preview post-preview-mvp">
           {% include home_post_card.html post=post %}
         </li>
       {% endif %}
@@ -64,15 +64,15 @@ layout: page
 <hr>
 
 <!-- ========================= -->
-<!-- MVP / PRODUCT -->
+<!-- BI / ANALYTICS -->
 <!-- ========================= -->
 <section class="home-section">
-  <h2 class="home-section-title">🚀 MVP / Product</h2>
+  <h2 class="home-section-title">📊 BI / Analytics</h2>
 
   <ul class="posts-list list-unstyled" role="list">
     {% for post in posts %}
-      {% if post.project_type == "mvp" %}
-        <li class="post-preview post-preview-mvp">
+      {% if post.project_type == "bi" %}
+        <li class="post-preview post-preview-bi">
           {% include home_post_card.html post=post %}
         </li>
       {% endif %}
