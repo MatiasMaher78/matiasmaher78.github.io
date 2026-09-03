@@ -51,9 +51,25 @@ The honest read: this is not "no manual data entry" yet. It's a system that remo
 
 ## What's next
 
-- Generalizing the Excel export beyond a single client's fixed column layout — the current blocker to onboarding a second client (the data model already supports multi-tenant, the parsing layer doesn't yet).
-- Promoting v3/v4 models from shadow to production once their offline numbers clear the current baseline.
-- Moving from local execution to an actual pilot deployment (VPS, systemd, real auth hardening beyond Basic Auth).
+The immediate priority is closing out **Dataset Factory** — the data governance layer behind this pipeline's dataset, not a separate product. It normalizes 236 legacy classes into 194 confirmed visual identities, with provenance tracking, duplicate control, and vehicle-safe splits.
+
+Current state (September 2026):
+
+- **Human review closeout** — targeted for the first ten days of September. Automated triage already cut 117,013 raw candidate records down to 181 targeted review units before any manual review starts.
+- **Taxonomy closeout** — pending the outcome of that review.
+- **7 of 194 confirmed identities still have zero visual support.** Closing them means sourcing new real images from external channels — the internal inventory this project originated from is explicitly excluded from that sourcing strategy, to keep the dataset commercially reusable on its own.
+- **The clean canonical dataset (v1) won't be built until all 194 identities have visual coverage** — a deliberately complete baseline rather than a partial one to patch later.
+
+From there, the sequence is: taxonomy close → external data acquisition → 194/194 coverage verified → clean canonical dataset v1 → global human QA → train the next model generation → offline evaluation → independent/shadow evaluation → promote or iterate.
+
+Two pieces of the architecture are deliberately unfinished, not abandoned:
+
+- **Evidence reducers** — a safety layer that can only rule candidates out, never invent new ones — are built as a standalone, fail-closed primitive, but not yet wired into the decision path. The contract was validated first; integration happens once the new visual/ERP architecture leaves shadow.
+- **W1-B** (separating CV visual identity from ERP business identity from physical part instance) and **photo-reuse lineage** (bounded, non-transitive reuse rules for photos shared across near-identical parts) have a defined business contract but no implementation yet. Neither blocks closing Dataset Factory or training the next model — they're required before the identity/lineage architecture can be called complete.
+
+The `SAFE_AUTO` policy that governs full automation stays off by default until independent evaluation evidence exists to set real acceptance thresholds — no arbitrary numbers get chosen ahead of the data.
+
+That's the point this project is built to demonstrate: not a single trained detector, but the data and evaluation infrastructure to replace and improve that detector safely, repeatedly, over time.
 
 ## Stack
 
