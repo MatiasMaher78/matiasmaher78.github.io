@@ -51,7 +51,9 @@ The honest read: this is not "no manual data entry" yet. It's a system that remo
 
 ## What's next
 
-The immediate priority is closing out **Dataset Factory** — the data governance layer behind this pipeline's dataset, not a separate product. It normalizes 236 legacy classes into 194 confirmed visual identities, with provenance tracking, duplicate control, and vehicle-safe splits.
+The numbers above predate a deeper rework of the data layer behind this pipeline, and they'll change once that work closes out. The immediate priority is **Dataset Factory** — the data governance layer that normalizes this pipeline's legacy classes into a clean, provenance-tracked taxonomy before the next model gets trained.
+
+**The short version:** the automated groundwork for human review is done — 117,013 raw candidate records have already been triaged down to 181 review units — and the review itself starts in the first ten days of September. Seven part categories still need real photos before the next model can train on them, and two safety-critical pieces of the architecture are designed but not wired in yet — on purpose. Full detail below for anyone who wants it.
 
 Current state (September 2026):
 
