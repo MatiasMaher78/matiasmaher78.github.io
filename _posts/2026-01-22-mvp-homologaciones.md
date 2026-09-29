@@ -255,7 +255,7 @@ It was paused after the validation period because a commercial agreement on the 
 
 The demo uses anonymized real vehicle data and shows the complete workflow from source URLs to the final multilingual DOCX document.
 
-[Watch the Vehicle Data Print demo](https://youtu.be/CwCSCGocNyU)
+[Watch the Vehicle Data Print demo](https://www.youtube.com/watch?v=9V5ZQLSo84M)
 
 ---
 
