@@ -5,11 +5,11 @@ date: "2025-06-05 12:00:00 -0300"
 categories: [mvp, product]
 project_type: mvp
 image: "/assets/img/thumb.png"
-share-description: "Functional automotive homologation MVP that reduced vehicle technical documentation time from 40–50 minutes to around 15 minutes, processing 97 structured fields and generating DOCX files in 10 languages."
+share-description: "Independently developed automotive homologation tool, validated in daily use by homologation technicians, that reduced vehicle technical documentation time from 40–50 minutes to around 15 minutes, processing 97 structured fields and generating DOCX files in 10 languages."
 tags: [React, TypeScript, FastAPI, Python, Supabase, Automotive Homologation, Vehicle Technical Data, Document Automation, Web Scraping, Human-in-the-Loop, DOCX Generation, Multilingual Application, WLTP, NEDC, Full-Stack MVP]
 ---
 
-**Functional MVP · Real-user validated · Currently paused**
+**Independent product · Validated with real users · Not continued commercially**
 
 A full-stack tool that automates vehicle technical data collection and multilingual DOCX generation for automotive homologation.
 
@@ -26,6 +26,8 @@ The workflow required repetitive data entry and continuous value checking, which
 - producing technical documents in multiple languages required additional manual work.
 
 The same three automotive technicians who performed the manual workflow later used Vehicle Data Print during its operational validation.
+
+Vehicle Data Print is my own product, built on my hands-on experience as an Automotive Homologation Technician. I offered it to COC Europe, where it was validated in daily use. It was not built as part of my employment there.
 
 ---
 
@@ -68,7 +70,7 @@ The system does not blindly publish extracted information. Every final value rem
 
 ## Real-world validation
 
-Vehicle Data Print was validated in a real operational environment:
+Vehicle Data Print was validated in a real operational environment at COC Europe:
 
 - **3 automotive homologation technicians** used the application;
 - the tool was used **daily**;
@@ -221,7 +223,7 @@ The use of controlled templates improves terminology consistency and reduces the
 
 ## My role
 
-I designed and built the product end-to-end, combining automotive homologation knowledge with full-stack development.
+I designed and built the product end-to-end as an independent developer, combining automotive homologation knowledge with full-stack development.
 
 My work included:
 
@@ -243,11 +245,11 @@ LLMs were used as development accelerators for architecture exploration, impleme
 
 ## Product status
 
-`Functional MVP · Real-user validated · Currently paused`
+`Independent product · Validated with real users · Not continued commercially`
 
-The product was developed over approximately four months and validated through daily use with real users and real vehicle data.
+The product was developed over approximately four months and validated through daily use by COC Europe technicians with real vehicle data.
 
-It was paused after the validation period because a commercial agreement on the subscription price was not reached. The product was not paused because of a failure in its core technical workflow.
+It did not continue after the validation period because no agreement was reached on the subscription terms. It was not discontinued because of a failure in its core technical workflow. It is not currently in operational use.
 
 ---
 
@@ -268,7 +270,7 @@ The demo uses anonymized real vehicle data and shows the complete workflow from 
 - Daily operational use during validation.
 - Processing time reduced to around 15 minutes per vehicle.
 - Human review retained before every export.
-- Private source-code repository.
+- Private source-code repository; a sanitized portfolio version is available on [GitHub](https://github.com/MatiasMaher78/vehicle-data-print-portfolio).
 - Functional full-stack MVP validated with real-world automotive data.
 
 ---
