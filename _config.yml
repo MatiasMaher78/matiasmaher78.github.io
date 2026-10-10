@@ -2,6 +2,15 @@
 # --- General options --- #
 ###########################
 
+# Site name shown in the navbar and appended to page titles
+title: Matias Maher
+author: Matias Maher
+
+# Top navigation
+navbar-links:
+  Projects: "/"
+  About: "aboutme"
+
 # Select which social network share links to show in posts
 share-links-active:
   twitter: true
@@ -51,6 +60,20 @@ navbar-var-length: false
 
 # The keywords to associate with your website, for SEO purposes
 keywords: "Data Engineer, Automotive Data, Computer Vision, YOLO, OCR, Python, SQL, FastAPI, React, Supabase, ETL, Web Scraping, Automotive Parts, OEM Validation, Automotive Pricing, Vehicle Homologation, Power BI, Human-in-the-Loop, Workflow Automation"
+
+# Repository and theme files that should not be published as site content
+exclude:
+  - CHANGELOG.md
+  - README.md
+  - LICENSE
+  - screenshot.png
+  - staticman.yml
+  - Appraisals
+  - beautiful-jekyll-theme.gemspec
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
 
 ######################################
 # --- Custom site CSS (portfolio) --- #
