@@ -6,14 +6,14 @@ date: 2026-07-28 12:00:00 -0300
 categories: [cv, automation]
 project_type: cv
 image: "/assets/img/thumb.png"
-share-description: "A YOLO-based detection and human-in-the-loop system that turns raw vehicle photos into structured, exportable parts data"
-tags: [Computer Vision, YOLO, Object Detection, ONNX, OCR, FastAPI, React, TypeScript, Streamlit, Human-in-the-Loop, Data Quality, Automotive, Python, SQLite]
+share-description: "Independent product in active development: a YOLO-based detection and human-in-the-loop system that turns raw vehicle photos into structured parts data, with a provenance-tracked dataset layer (Dataset Factory)."
+tags: [Computer Vision, YOLO, Object Detection, ONNX, OCR, FastAPI, React, TypeScript, Streamlit, Human-in-the-Loop, Data Quality, Dataset Engineering, CVAT, Automotive, Python, SQLite]
 comments: false
 ---
 
-**In active development · Offline-validated on real photo sets · Not yet deployed to production**
+**Independent product · In active development · Components validated offline · No external client or pilot · Not commercially deployed**
 
-Cataloguing used autoparts starts with a photo. Someone has to look at it, figure out what part it is, match it to the right vehicle, and get it into a system correctly enough to publish. **Autoparts Integrator** automates the parts of that flow that can be automated safely, and routes the rest to a human — by design, not by accident.
+Cataloguing used autoparts starts with a photo. Someone has to look at it, figure out what part it is, match it to the right vehicle, and get it into a system correctly enough to publish. **Autoparts Integrator** is an independent product I'm building to automate the parts of that flow that can be automated safely, and route the rest to a human — by design, not by accident.
 
 <!--more-->
 
@@ -21,61 +21,64 @@ Cataloguing used autoparts starts with a photo. Someone has to look at it, figur
 
 In automotive parts operations, part identification from photos is repetitive, error-prone, and hard to scale consistently. Getting a part wrong — or worse, mixing up a left/right symmetric part — has a real cost: broken listings, wrong pricing, wasted stock movements.
 
-The goal wasn't to remove human judgment. It was to automate high-confidence cases and concentrate manual effort exactly where it's needed.
+The goal isn't to remove human judgment. It's to automate high-confidence cases and concentrate manual effort exactly where it's needed.
 
-## What I built
+## What is implemented
 
 A photo intake and detection pipeline with a human review layer built into the core design, not bolted on:
 
 1. **Intake** — a watcher monitors Google Drive for new vehicle photo folders and queues a job per vehicle.
 2. **Quality gate** — before any inference runs, a perceptual-hash + blur/brightness filter discards duplicates and unusable shots.
-3. **Detection** — a YOLO model (ONNX, CPU inference) classifies parts in each image. Detections above a 0.50 confidence threshold are auto-assigned; everything else goes to a review queue instead of being guessed.
-4. **OCR validation (optional)** — for auto-assigned parts, a deterministic OCR step (OCR.space or self-hosted PaddleOCR) reads part labels. A rule-based scoring engine — regex brand matching, per-class thresholds, penalty rules for known false-positive patterns — decides READY / REVIEW / FAILED. No model does the reasoning here; it's an auditable, hand-tuned decision layer.
-5. **Human-in-the-loop review** — a Streamlit tool lets an operator resolve the review queue and correct OCR candidates. Symmetric parts (left/right) are **forced to review regardless of confidence**, a deliberate safety choice to prevent a class of error that's expensive to get wrong.
-6. **Export** — validated results are written to Excel matching the client's existing ERP layout, ready for commercial review.
+3. **Detection** — a baseline YOLO model (ONNX, CPU inference) classifies parts in each image. Detections above a configured confidence threshold are auto-assigned; everything else goes to a review queue instead of being guessed.
+4. **OCR validation (optional, off by default)** — for auto-assigned parts, a deterministic OCR step (OCR.space or self-hosted PaddleOCR) reads part labels. A rule-based scoring engine — regex brand matching, per-class thresholds, penalty rules for known false-positive patterns — decides READY / REVIEW / FAILED. No model does the reasoning here; it's an auditable, hand-tuned decision layer.
+5. **Human-in-the-loop review** — a Streamlit tool lets an operator resolve the review queue and correct OCR candidates.
+6. **Export** — validated results are written to an ERP-compatible Excel import layout, ready for commercial review.
 
-A FastAPI backend and a separate React + TypeScript frontend expose this flow to a pilot-facing app, on top of the internal Streamlit operator tool.
+A FastAPI backend and a separate React + TypeScript frontend expose the same flow as a web application, alongside the internal Streamlit operator tool. The application runs in development and internal testing; it has no external users and is not commercially deployed.
 
-## Why three model generations, and why most aren't live yet
+## Baseline model and shadow evaluation
 
-Production today runs on a single YOLO model gating what gets auto-assigned. Two newer model generations (v3: 3 models split by class group, 115 classes; v4: 5 models, 237 classes, end-to-end ONNX export) run in **shadow mode** — they process every image and log predictions for offline comparison, but a kill switch keeps them from affecting what the user sees until they're validated against production. That's the deliberate trade-off: split hard-to-detect classes into smaller specialized models rather than one large one, and promote them only once the numbers justify it.
+In the current pipeline, a single baseline YOLO model decides what gets auto-assigned. Two newer model generations are configured to run in **shadow mode**:
 
-## Real numbers (offline evaluation, not production telemetry)
+- **v3:** 3 models split by class group, 115 classes;
+- **v4:** 5 models, 237 classes, end-to-end ONNX export.
 
-These come from running the pipeline against real automotive parts photo archives — not from a live monitoring system, since one doesn't exist yet:
+Shadow models process images and log predictions for offline comparison, but they never change what gets assigned, and each has a kill switch. Neither has been promoted. The design choice is deliberate: split hard-to-detect classes into smaller specialized models rather than one large one, and promote them only once independent evaluation justifies it.
 
-- **1,671 real photos** from a single vehicle, processed end-to-end at ~1.2s/image average (CPU-only inference).
-- On a smaller real sample (9 vehicles, 109 photos): **~9% of images reached a fully automated READY state**, with the rest routed to review — a meaningful share of that by deliberate design (symmetric parts always reviewed), not model failure.
+## Evaluation and safety infrastructure
 
-The honest read: this is not "no manual data entry" yet. It's a system that removes the *easy* manual work and concentrates human attention on the cases that actually need it — with the infrastructure (shadow models, quality gates, audit logging) already in place to raise that automation rate over time.
+Implemented and covered by tests, but intentionally **not** connected to product decisions yet:
 
-## What's next
+- an **independent evaluation harness** with a sealed holdout gate and a read-only metrics report;
+- a **versioned `SAFE_AUTO` policy registry** — every policy is created as `DISABLED`, and promotion is blocked until acceptance criteria (minimum sample size, precision, tolerated false-auto rate) are formally defined. No runtime code consults it yet;
+- **fail-closed evidence reducers** — a safety layer that can only rule candidates out, never invent new ones — built as a standalone primitive, not yet wired into the decision path;
+- an isolated **shadow path for the new visual taxonomy**, disabled by default.
 
-The numbers above predate a deeper rework of the data layer behind this pipeline, and they'll change once that work closes out. The immediate priority is **Dataset Factory** — the data governance layer that normalizes this pipeline's legacy classes into a clean, provenance-tracked taxonomy before the next model gets trained.
+The codebase has an automated pytest suite of 1,366 test cases (collected count, October 2026).
 
-**The short version:** the automated groundwork for human review is done — 117,013 raw candidate records have already been triaged down to 181 review units — and the review itself starts in the first ten days of September. Seven part categories still need real photos before the next model can train on them, and two safety-critical pieces of the architecture are designed but not wired in yet — on purpose. Full detail below for anyone who wants it.
+Still designed but not implemented: **W1-B** (separating CV visual identity from ERP business identity from the physical part instance) and **photo-reuse lineage** (bounded, non-transitive rules for photos shared across near-identical parts). Both are required before the identity/lineage architecture can be called complete, and before any automation policy can be enabled.
 
-Current state (September 2026):
+## Pipeline stress test
 
-- **Human review closeout** — targeted for the first ten days of September. Automated triage already cut 117,013 raw candidate records down to 181 targeted review units before any manual review starts.
-- **Taxonomy closeout** — pending the outcome of that review.
-- **7 of 194 confirmed identities still have zero visual support.** Closing them means sourcing new real images from external channels — the internal inventory this project originated from is explicitly excluded from that sourcing strategy, to keep the dataset commercially reusable on its own.
-- **The clean canonical dataset (v1) won't be built until all 194 identities have visual coverage** — a deliberately complete baseline rather than a partial one to patch later.
+- 1,671 real photos from a single vehicle, processed end-to-end with 0 processing errors at ~1.2s/image (CPU-only inference).
 
-From there, the sequence is: taxonomy close → external data acquisition → 194/194 coverage verified → clean canonical dataset v1 → global human QA → train the next model generation → offline evaluation → independent/shadow evaluation → promote or iterate.
+## Dataset Factory — status (October 2026)
 
-Two pieces of the architecture are deliberately unfinished, not abandoned:
+**Dataset Factory** is the data governance layer that turns the pipeline's legacy classes and historical annotations into a clean, provenance-tracked training dataset. Current state:
 
-- **Evidence reducers** — a safety layer that can only rule candidates out, never invent new ones — are built as a standalone, fail-closed primitive, but not yet wired into the decision path. The contract was validated first; integration happens once the new visual/ERP architecture leaves shadow.
-- **W1-B** (separating CV visual identity from ERP business identity from physical part instance) and **photo-reuse lineage** (bounded, non-transitive reuse rules for photos shared across near-identical parts) have a defined business contract but no implementation yet. Neither blocks closing Dataset Factory or training the next model — they're required before the identity/lineage architecture can be called complete.
+- **Taxonomy:** a versioned taxonomy build (late September 2026) consolidates legacy classes into **164 training target classes**, with lineage, rollback manifests and explicit left/right laterality handling.
+- **Semantic human review:** completed for the first review scope — **3,268 records** reviewed and ingested under strict validation, of which 2,972 were confirmed as correct class images, 295 rejected as unusable and 1 removed as a duplicate.
+- **Next step:** bounding-box re-annotation in CVAT for the confirmed records, currently in preparation.
+- **Coverage gaps:** a small number of target classes still lack sufficient image support and need newly sourced, provenance-resolved images.
+- **Not done yet:** the clean canonical dataset is not finalized, the dataset is not training-ready, and no new model has been trained or promoted on it.
 
-The `SAFE_AUTO` policy that governs full automation stays off by default until independent evaluation evidence exists to set real acceptance thresholds — no arbitrary numbers get chosen ahead of the data.
+From there, the sequence is: CVAT re-annotation → full class coverage verified → clean canonical dataset v1 → global human QA → train the next model generation → offline evaluation → independent/shadow evaluation → promote or iterate.
 
 That's the point this project is built to demonstrate: not a single trained detector, but the data and evaluation infrastructure to replace and improve that detector safely, repeatedly, over time.
 
 ## Stack
 
-**Python** · **YOLO (ONNX Runtime)** · **OCR (OCR.space / PaddleOCR)** · **FastAPI** · **React + TypeScript** · **Streamlit** · **SQLAlchemy + SQLite** · **Google Drive API** · **pytest (695 tests)**
+**Python** · **YOLO (ONNX Runtime)** · **OCR (OCR.space / PaddleOCR)** · **FastAPI** · **React + TypeScript** · **Streamlit** · **SQLAlchemy + SQLite** · **Google Drive API** · **CVAT** · **pytest**
 
 <!--
 Agregar capturas cuando estén disponibles, siguiendo el mismo patrón que las otras páginas:
