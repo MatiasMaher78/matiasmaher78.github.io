@@ -244,7 +244,7 @@ The project does not claim automatic CAPTCHA solving, anti-blocking guarantees o
 
 ## My role
 
-I designed and implemented the automation based on a real automotive inventory-validation workflow.
+I designed and implemented the automation as part of my role as a Data Engineer at Reciclauto, based on a real automotive inventory-validation workflow.
 
 My work included:
 
@@ -266,11 +266,11 @@ I was also the operational user responsible for running the batches and reviewin
 
 `Completed automation · Used in real operations`
 
-The project was successfully implemented for periodic validation campaigns on existing inventory.
+The project was implemented during my time at Reciclauto and used for periodic validation campaigns on existing inventory.
 
-It remains reusable for future stock-validation work. The same engineering approach can also be adapted to related automotive data extraction and OEM pricing workflows.
+The same engineering approach can be adapted to related automotive data extraction and OEM pricing workflows. A sanitized portfolio version of the code is available on [GitHub](https://github.com/MatiasMaher78/oem-validation-portfolio); it contains no real inventory data.
 
-The automation has not been run recently, so the target website and scraping selectors may require maintenance before a new operational execution.
+As with any scraping-based tool, the target website and selectors may require maintenance before a new operational execution.
 
 ---
 

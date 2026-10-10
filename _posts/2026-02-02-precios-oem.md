@@ -5,11 +5,11 @@ date: 2026-01-23 12:00:00 -0300
 categories: [automation, scripts]
 project_type: automation
 image: "/assets/img/thumb.png"
-description: "Internal OEM pricing ETL pipeline for used automotive parts. Processes 250–300 products weekly with Python, pandas, HTTP web scraping, caching, retries, checkpoints and statistical outlier filtering."
+share-description: "Internal OEM pricing ETL pipeline for used automotive parts that replaced an outsourced weekly process. Processes 250–300 products per week with Python, pandas, HTTP web scraping, caching, retries, checkpoints and statistical outlier filtering."
 tags: [Python, Pandas, Web Scraping, ETL, Automotive, OEM Pricing, Pricing Automation, Data Engineering, Data Quality, Pytest, Data Pipeline, Batch Processing, Automation]
 ---
 
-Built an internal **OEM pricing ETL pipeline** for used automotive parts, replacing a contractor-dependent weekly workflow with a repeatable and auditable in-house service. The pipeline processes **250–300 products per week** in approximately **five hours**, producing structured market pricing data for commercial review and bulk publication.
+Built an internal **OEM pricing ETL pipeline** for used automotive parts at Reciclauto, replacing a contractor-dependent weekly workflow with a repeatable and auditable in-house service. The pipeline processes **250–300 products per week** in approximately **five hours**, producing structured minimum/maximum market prices and listing counts that feed the commercial team's pricing and ERP publication process. It was handed over in October 2026 working, documented and covered by automated tests, and it remains in use.
 
 <!--more-->
 
@@ -28,7 +28,7 @@ This created several operational constraints:
 
 The process was business-critical because pricing teams needed consistent market references for hundreds of used automotive parts every week.
 
-After the internal pipeline was validated, the company no longer needed to outsource this workflow.
+After the internal pipeline was validated, the workflow no longer depended on an external provider.
 
 ---
 
@@ -50,31 +50,35 @@ For every product, it:
 
 ### Output structure
 
-The final dataset contains fields such as:
+For each product with matching listings, the pipeline returns:
 
-- `ID`
-- `OEM`
-- `Units`
-- `Min Price`
-- `Max Price`
+- `ID` and `OEM` — the product identifiers from the input batch;
+- `Units` — the number of valid matching listings found;
+- `Min Price` and `Max Price` — the observed market price range after filtering.
 
-This output becomes the pricing reference used in the downstream commercial workflow.
+The pipeline only extracts, filters and formats market prices. It does not calculate margins or set final prices. This output is the market price reference for the downstream commercial workflow.
 
 ---
 
 ## End-to-end business workflow
 
 ```text
+Pipeline scope (automated):
 OEM product batch
 → automated market extraction
 → relevance and outlier filtering
+→ min/max price range per product
 → structured XLSX/CSV output
-→ manual pricing of unmatched products
+
+Downstream (commercial team):
+→ margin calculation and manual pricing of unmatched products
 → Sales Director review
-→ bulk publication by management
+→ ERP upload and bulk publication
 ```
 
-Products without reliable matches are not assigned an automatic price. They are separated for manual calculation and review.
+The pipeline's responsibility ends at the structured output. Margins, final prices and the ERP upload are handled by the commercial team.
+
+Products without reliable matches are not assigned an automatic price range. They are separated for manual calculation and review.
 
 This human validation step keeps commercial decisions under business control while automating the repetitive data collection and consolidation work.
 
@@ -84,7 +88,7 @@ This human validation step keeps commercial decisions under business control whi
 
 The project evolved from browser-based automation into a lighter **HTTP extraction pipeline**.
 
-The current implementation uses a batch-oriented architecture built around:
+The final implementation uses a batch-oriented architecture built around:
 
 * a configurable HTTP client;
 * HTML parsing;
@@ -136,13 +140,11 @@ These decisions make the result more stable when external listings contain unrel
 ## Business impact
 
 * **250–300 products processed each week**
-* approximately **five hours of automated execution**
+* approximately **five hours of automated execution** per weekly batch
 * weekly delivery no longer depends on external developer availability
-* recurring third-party execution fees were eliminated
-* operational delays were reduced to a maximum of approximately one or two days
+* the workflow no longer requires an outsourced execution
 * unmatched products remain under manual commercial review
-* the Sales Director validates the final pricing data
-* management performs the subsequent bulk publication
+* the commercial team calculates margins, the Sales Director validates the final pricing, and prices are then loaded into the ERP
 
 The main outcome was not only faster extraction. The company converted an outsourced dependency into an internal operational capability.
 
@@ -168,7 +170,7 @@ This makes the project a maintainable data pipeline rather than a one-off scrapi
 
 ## My role
 
-I designed, implemented and maintain the complete workflow, including:
+I designed, implemented, documented and maintained the pipeline until its handover in October 2026, including:
 
 * requirements analysis with the automotive business;
 * Python ETL development;
@@ -190,19 +192,18 @@ The project combines **data engineering**, **automotive domain knowledge** and *
 
 * Replaced a contractor-dependent weekly process with an internal service.
 * Processes 250–300 used automotive products per week.
-* Produces structured and auditable OEM market pricing data.
-* Eliminated recurring external execution fees.
-* Reduced dependency on third-party availability.
-* Maintains human review for unmatched and commercially sensitive cases.
-* Supports the downstream bulk publication workflow.
+* Produces structured and auditable OEM market price ranges (Min, Max, Units).
+* Removed the operational dependency on an external provider.
+* Keeps human review for unmatched and commercially sensitive cases.
+* Feeds the downstream pricing and ERP publication workflow run by the commercial team.
 
 ---
 
 ## Status
 
-`In production`
+`Delivered · Documented and tested · In use`
 
-The pipeline is used as a recurring weekly internal service.
+The pipeline was handed over in October 2026 working, documented and covered by automated tests, and it remains in use as a recurring weekly internal service at Reciclauto.
 
 ---
 
@@ -221,3 +222,7 @@ The pipeline is used as a recurring weekly internal service.
 ## Stack
 
 **Python** · **pandas** · **curl_cffi** · **BeautifulSoup** · **HTTP Web Scraping** · **ETL** · **pytest** · **CLI** · **XLSX/CSV**
+
+---
+
+*Note: the OEM references and part IDs shown in the screenshots have been deliberately altered.*
