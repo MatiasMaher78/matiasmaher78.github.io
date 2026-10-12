@@ -219,6 +219,8 @@ The pipeline was handed over in October 2026 working, documented and covered by 
 
 ---
 
+A sanitized public version of the engine core is available on [GitHub](https://github.com/MatiasMaher78/oem-pricing-portfolio). It runs against a public scraping sandbox and contains no production data; batch input files, relevance filtering, listing counts, checkpoints, the availability check and the CSV fallback remain in the private production version.
+
 ## Stack
 
 **Python** · **pandas** · **curl_cffi** · **BeautifulSoup** · **HTTP Web Scraping** · **ETL** · **pytest** · **CLI** · **XLSX/CSV**
