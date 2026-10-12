@@ -10,9 +10,9 @@ The site presents project write-ups in data engineering, ETL and automation, dat
 |---|---|---|
 | Autoparts Integrator | Computer vision · human-in-the-loop · dataset engineering | Independent product, in active development |
 | Vehicle Data Print | Full-stack homologation tool | Independent product, validated with real users |
-| Automotive OEM Pricing ETL | ETL · web scraping | Reciclauto |
-| Automotive OEM Validation | Browser automation · data quality | Reciclauto |
-| Historical Sales & Data Quality Dashboard | Power BI · DAX | Reciclauto, demo data |
+| Automotive OEM Pricing ETL | ETL · web scraping | Automotive parts recycler (Spain) |
+| Automotive OEM Validation | Browser automation · data quality | Automotive parts recycler (Spain) |
+| Historical Sales & Data Quality Dashboard | Power BI · DAX | Automotive parts recycler (Spain), demo data |
 
 Project pages live in `_posts/`, the homepage in `index.html` and the About page in `aboutme.md`. Projects are grouped on the homepage by the `project_type` front matter field (`cv`, `mvp`, `automation`, `bi`).
 

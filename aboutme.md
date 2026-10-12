@@ -11,7 +11,7 @@ I'm self-taught. I use LLM assistants during development for research, architect
 
 ## Experience
 
-### Reciclauto — Data Engineer (Automation & AI Systems)
+### Automotive parts recycler, Spain — Data Engineer (Automation & AI Systems)
 
 *November 2024 – October 2026*
 

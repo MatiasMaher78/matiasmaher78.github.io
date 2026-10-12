@@ -9,7 +9,7 @@ share-description: "Internal OEM pricing ETL pipeline for used automotive parts 
 tags: [Python, Pandas, Web Scraping, ETL, Automotive, OEM Pricing, Pricing Automation, Data Engineering, Data Quality, Pytest, Data Pipeline, Batch Processing, Automation]
 ---
 
-Built an internal **OEM pricing ETL pipeline** for used automotive parts at Reciclauto, replacing a contractor-dependent weekly workflow with a repeatable and auditable in-house service. The pipeline processes **250–300 products per week** in approximately **five hours**, producing structured minimum/maximum market prices and listing counts that feed the commercial team's pricing and ERP publication process. It was handed over in October 2026 working, documented and covered by automated tests, and it remains in use.
+Built an internal **OEM pricing ETL pipeline** for used parts at an automotive parts recycler in Spain, replacing a contractor-dependent weekly workflow with a repeatable and auditable in-house service. The pipeline processes **250–300 products per week** in approximately **five hours**, producing structured minimum/maximum market prices and listing counts that feed the commercial team's pricing and ERP publication process. It was handed over in October 2026 working, documented and covered by automated tests, and it remains in use.
 
 <!--more-->
 
@@ -203,7 +203,7 @@ The project combines **data engineering**, **automotive domain knowledge** and *
 
 `Delivered · Documented and tested · In use`
 
-The pipeline was handed over in October 2026 working, documented and covered by automated tests, and it remains in use as a recurring weekly internal service at Reciclauto.
+The pipeline was handed over in October 2026 working, documented and covered by automated tests, and it remains in use as a recurring weekly internal service at the company.
 
 ---
 
